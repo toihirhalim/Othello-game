@@ -19,9 +19,9 @@ public class Game {
     Move [] whitePlayerPossibleMoves;
     Move [] blackPlayerPossibleMoves;
     List<Move> moves;
+    List<String [][]> boards;
     
-
-    public boolean checkpossibilities(String color, int i, int j, int iDir, int jDir, int round){
+    public boolean checkpossibilities(String color, int i, int j, int iDir, int jDir, int round, boolean colorMode){
         i += iDir;
         j += jDir;
         if(i < 0 || i >= board.length || j < 0 || j >= board.length) return false;
@@ -30,10 +30,13 @@ public class Game {
         
         if(round == 0 && board[i][j].equals(color)) return false;
         
-        if(round > 1 && board[i][j].equals(color)) return true;
+        if(board[i][j].equals(color)) return true;
         
-        return checkpossibilities(color, i, j, iDir, jDir, ++round);
-        
+        if(checkpossibilities(color, i, j, iDir, jDir, ++round, colorMode)){
+            if(colorMode) board[i-1][j-1] = color;
+            return true;
+        }
+        return false;
     }
     public String [][] newGame(){
         String [][] newBoard = {
@@ -91,14 +94,14 @@ public class Game {
         for(int i = 0;  i < board.length; i++){
             for(int j = 0; j < board.length; j++){
                 if(board[i][j].equals("_")){
-                    if(checkpossibilities(player.getColor(), i, j, -1, -1, 0)
-                        || checkpossibilities(player.getColor(), i, j, -1, 1, 0)
-                        || checkpossibilities(player.getColor(), i, j, 1, -1, 0)
-                        || checkpossibilities(player.getColor(), i, j, 1, 1, 0)
-                        || checkpossibilities(player.getColor(), i, j, -1, 0, 0)
-                        || checkpossibilities(player.getColor(), i, j, 0, -1, 0)
-                        || checkpossibilities(player.getColor(), i, j, 1, 0, 0)
-                        || checkpossibilities(player.getColor(), i, j, 0, 1, 0))
+                    if(checkpossibilities(player.getColor(), i, j, -1, -1, 0, false)
+                        || checkpossibilities(player.getColor(), i, j, -1, 1, 0, false)
+                        || checkpossibilities(player.getColor(), i, j, 1, -1, 0, false)
+                        || checkpossibilities(player.getColor(), i, j, 1, 1, 0, false)
+                        || checkpossibilities(player.getColor(), i, j, -1, 0, 0, false)
+                        || checkpossibilities(player.getColor(), i, j, 0, -1, 0, false)
+                        || checkpossibilities(player.getColor(), i, j, 1, 0, 0, false)
+                        || checkpossibilities(player.getColor(), i, j, 0, 1, 0, false))
                         m.add(new Move(i, j, player.getColor()));
                 }
             }
@@ -113,41 +116,62 @@ public class Game {
     public boolean playMove(Move move){
         int i = move.i, j = move.j;
         String color = move.color;
+        boolean test, previous = false;
         
         if((blackPlayNow && !color.equals("b")) || !blackPlayNow && !color.equals("w")) return false;
         
-        if(checkpossibilities(color, i, j, -1, -1, 0)
-            || checkpossibilities(color, i, j, -1, 1, 0)
-            || checkpossibilities(color, i, j, 1, -1, 0)
-            || checkpossibilities(color, i, j, 1, 1, 0)
-            || checkpossibilities(color, i, j, -1, 0, 0)
-            || checkpossibilities(color, i, j, 0, -1, 0)
-            || checkpossibilities(color, i, j, 1, 0, 0)
-            || checkpossibilities(color, i, j, 0, 1, 0)){
-            
-            board[i][j] = color;
-            evaluateScore();
-            moves.add(move);
-            
-            if(blackPlayNow){
-                whitePlayerPossibleMoves = possibleMoves(whitePlayer);
-                blackPlayerPossibleMoves = new Move[0];
-            }else {
-                blackPlayerPossibleMoves = possibleMoves(blackPlayer);
-                whitePlayerPossibleMoves = new Move[0];
-            }
-            blackPlayNow = !blackPlayNow;
+        test = checkpossibilities(color, i, j, -1, -1, 0, true);
+        previous = test ? true : previous;
+        test = checkpossibilities(color, i, j, -1, 1, 0, true);
+        previous = test ? true : previous;
+        test = checkpossibilities(color, i, j, 1, -1, 0, true);
+        previous = test ? true : previous;
+        test = checkpossibilities(color, i, j, 1, 1, 0, true);
+        previous = test ? true : previous;
+        test = checkpossibilities(color, i, j, -1, 0, 0, true);
+        previous = test ? true : previous;
+        test = checkpossibilities(color, i, j, 0, -1, 0, true);
+        previous = test ? true : previous;
+        test = checkpossibilities(color, i, j, 1, 0, 0, true);
+        previous = test ? true : previous;
+        test = checkpossibilities(color, i, j, 0, 1, 0, true);
+        previous = test ? true : previous;
+        
+        evaluateScore();
+        moves.add(move);
+        boards.add(board);
+
+        if(blackPlayNow){
+            whitePlayerPossibleMoves = possibleMoves(whitePlayer);
+            blackPlayerPossibleMoves = new Move[0];
+        }else {
+            blackPlayerPossibleMoves = possibleMoves(blackPlayer);
+            whitePlayerPossibleMoves = new Move[0];
         }
+        blackPlayNow = !blackPlayNow;
             
             
-        return false;
+        return previous;
     }
     public boolean gameOver(){
         if(gameFinished()) return true;
+        
         whitePlayerPossibleMoves = possibleMoves(whitePlayer);
         blackPlayerPossibleMoves = possibleMoves(blackPlayer);
         
-        //if()
+        if(whitePlayerPossibleMoves.length == 0 && blackPlayerPossibleMoves.length == 0) return true;
+        
         return false;
+    }
+    public void print(){
+        for(int i = 0 ; i < board.length; i++){
+            for(int j = 0; j< board.length; j++){
+                System.out.print(board[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+    public String winner(){
+        return whitePlayer.getScore() > blackPlayer.getScore() ? "WhitePlayer" : whitePlayer.getScore() > blackPlayer.getScore() ? "BlackPlayer" : "Draw";
     }
 }

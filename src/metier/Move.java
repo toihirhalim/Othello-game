@@ -21,5 +21,6 @@ public class Move {
         this.color = color;
     }
     
-    
+    public Move() {
+    }
 }
