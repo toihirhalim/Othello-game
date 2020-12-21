@@ -23,4 +23,8 @@ public class Move {
     
     public Move() {
     }
+    
+    public String toString(){
+        return "{" + i + ", " + j + "}";
+    }
 }

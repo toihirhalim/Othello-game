@@ -10,8 +10,8 @@ package metier;
  * @author Toihir
  */
 public class Player {
-    private String color;
     private String name;
+    private String color;
     private int score;
     
     static int numPlayers = 1;
@@ -24,12 +24,14 @@ public class Player {
     public Player(String color){
         this.color = color;
         this.name = "Player : " + numPlayers++;
+        this.score = 0;
     }
     
    
-    public Player(String color, String name){
+    public Player(String name, String color){
         this.color = color;
         this.name = name;
+        this.score = 0;
     }
 
     public String getColor() {

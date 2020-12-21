@@ -13,15 +13,15 @@ import java.util.ArrayList;
  */
 public class Game {
     String [][] board;
-    Player whitePlayer;
-    Player blackPlayer;
+    Player whitePlayer = new Player("w");
+    Player blackPlayer = new Player("b");
     boolean blackPlayNow = true;
-    Move [] whitePlayerPossibleMoves;
-    Move [] blackPlayerPossibleMoves;
+    Move [] playerPossibleMoves;
     List<Move> moves;
-    List<String [][]> boards;
+    List<Object> boards;
     
     public boolean checkpossibilities(String color, int i, int j, int iDir, int jDir, int round, boolean colorMode){
+        
         i += iDir;
         j += jDir;
         if(i < 0 || i >= board.length || j < 0 || j >= board.length) return false;
@@ -30,10 +30,13 @@ public class Game {
         
         if(round == 0 && board[i][j].equals(color)) return false;
         
-        if(board[i][j].equals(color)) return true;
+        if(board[i][j].equals(color)){
+            if(colorMode) board[i - iDir][j - jDir] = color;
+            return true;
+        }
         
         if(checkpossibilities(color, i, j, iDir, jDir, ++round, colorMode)){
-            if(colorMode) board[i-1][j-1] = color;
+            if(colorMode) board[i - iDir][j - jDir] = color;
             return true;
         }
         return false;
@@ -51,6 +54,8 @@ public class Game {
         };
         this.board = newBoard;
         this.blackPlayNow = blackPlayNow = true;
+        this.moves = new ArrayList();
+        this.boards = new ArrayList();
         return newBoard;
     }
     public void evaluateScore(){
@@ -73,42 +78,30 @@ public class Game {
         }
         return true;
     }
-    public Move [] emptyMoves(){
-        Move [] max = new Move[board.length];
-        
-        int count = 0;
-        for(int i = 0;  i < board.length; i++){
-            for(int j = 0; j < board.length; j++){
-                if(board[i][j].equals("_")) max[count++] = new Move(i, j, "_");
-            }
-        }
-        Move [] emptyMoves = new Move[--count];
-       for(int i = 0;  i < count; i++){
-            emptyMoves[i] = max[i];
-        }
-       return emptyMoves.length != 0 ? emptyMoves : null;
-    }
-    public Move [] possibleMoves(Player player){
+    public Move [] possibleMoves(String color){
         List<Move> m = new ArrayList(); 
         
         for(int i = 0;  i < board.length; i++){
             for(int j = 0; j < board.length; j++){
                 if(board[i][j].equals("_")){
-                    if(checkpossibilities(player.getColor(), i, j, -1, -1, 0, false)
-                        || checkpossibilities(player.getColor(), i, j, -1, 1, 0, false)
-                        || checkpossibilities(player.getColor(), i, j, 1, -1, 0, false)
-                        || checkpossibilities(player.getColor(), i, j, 1, 1, 0, false)
-                        || checkpossibilities(player.getColor(), i, j, -1, 0, 0, false)
-                        || checkpossibilities(player.getColor(), i, j, 0, -1, 0, false)
-                        || checkpossibilities(player.getColor(), i, j, 1, 0, 0, false)
-                        || checkpossibilities(player.getColor(), i, j, 0, 1, 0, false))
-                        m.add(new Move(i, j, player.getColor()));
+                    if(checkpossibilities(color, i, j, -1, -1, 0, false)
+                        || checkpossibilities(color, i, j, -1, 1, 0, false)
+                        || checkpossibilities(color, i, j, 1, -1, 0, false)
+                        || checkpossibilities(color, i, j, 1, 1, 0, false)
+                        || checkpossibilities(color, i, j, -1, 0, 0, false)
+                        || checkpossibilities(color, i, j, 0, -1, 0, false)
+                        || checkpossibilities(color, i, j, 1, 0, 0, false)
+                        || checkpossibilities(color, i, j, 0, 1, 0, false)){
+                        m.add(new Move(i, j, color));
+                    }
                 }
             }
         }
         Move [] possibleMoves = new Move[m.size()];
         for(int i = 0; i < possibleMoves.length; i++){
             possibleMoves[i] = m.get(i);
+            
+            System.out.println(possibleMoves[i]);
         }
         
         return possibleMoves;
@@ -137,17 +130,14 @@ public class Game {
         test = checkpossibilities(color, i, j, 0, 1, 0, true);
         previous = test ? true : previous;
         
+        if(!previous) return false;
+        
         evaluateScore();
         moves.add(move);
         boards.add(board);
-
-        if(blackPlayNow){
-            whitePlayerPossibleMoves = possibleMoves(whitePlayer);
-            blackPlayerPossibleMoves = new Move[0];
-        }else {
-            blackPlayerPossibleMoves = possibleMoves(blackPlayer);
-            whitePlayerPossibleMoves = new Move[0];
-        }
+        
+        System.out.println("moves " + moves.size() + " boards " + boards.size());
+        
         blackPlayNow = !blackPlayNow;
             
             
@@ -156,10 +146,16 @@ public class Game {
     public boolean gameOver(){
         if(gameFinished()) return true;
         
-        whitePlayerPossibleMoves = possibleMoves(whitePlayer);
-        blackPlayerPossibleMoves = possibleMoves(blackPlayer);
+        String color = blackPlayNow ? "b" : "w";
         
-        if(whitePlayerPossibleMoves.length == 0 && blackPlayerPossibleMoves.length == 0) return true;
+        playerPossibleMoves = possibleMoves(color);
+        
+        if(playerPossibleMoves.length == 0){
+            color = blackPlayNow ? "w" : "b";
+            
+            playerPossibleMoves = possibleMoves(color);
+            if(playerPossibleMoves.length == 0) return false;
+        }
         
         return false;
     }
@@ -174,4 +170,11 @@ public class Game {
     public String winner(){
         return whitePlayer.getScore() > blackPlayer.getScore() ? "WhitePlayer" : whitePlayer.getScore() > blackPlayer.getScore() ? "BlackPlayer" : "Draw";
     }
+    public String getColor(int i, int j){
+        return board[i][j];
+    }
+    public String getPlayerColor(){
+        return blackPlayNow ? "b" : "w";
+    }
+
 }

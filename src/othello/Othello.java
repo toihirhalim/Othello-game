@@ -27,6 +27,8 @@ public class Othello {
         while(!game.gameOver()){
             game.print();
             move = new Move();
+            move.color = game.getPlayerColor();
+            System.out.print("next move for " +move.color + " : " );
             move.i = sc.nextInt();
             move.j = sc.nextInt();
             game.playMove(move);
@@ -34,6 +36,8 @@ public class Othello {
         
         game.print();
         System.out.println(game.winner() + " is the winner !!");
+        //System.out.println("3 2 " + game.getColor(4,2) + " possible ?  " + game.checkpossibilities("w", 4, 2, 0, 1, 0, true));
+        //game.print();
     }
     
 }
