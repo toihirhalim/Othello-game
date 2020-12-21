@@ -136,10 +136,7 @@ public class Game {
         moves.add(move);
         boards.add(board);
         
-        System.out.println("moves " + moves.size() + " boards " + boards.size());
-        
         blackPlayNow = !blackPlayNow;
-            
             
         return previous;
     }
@@ -168,7 +165,8 @@ public class Game {
         }
     }
     public String winner(){
-        return whitePlayer.getScore() > blackPlayer.getScore() ? "WhitePlayer" : whitePlayer.getScore() > blackPlayer.getScore() ? "BlackPlayer" : "Draw";
+        String winner = whitePlayer.getScore() > blackPlayer.getScore() ? "WhitePlayer" : whitePlayer.getScore() > blackPlayer.getScore() ? "BlackPlayer" : "Draw !!!";
+        return winner.equals("draw !!!")? winner : winner + "won !!!";
     }
     public String getColor(int i, int j){
         return board[i][j];

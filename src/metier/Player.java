@@ -58,5 +58,7 @@ public class Player {
         this.score = score;
     }
     
-    
+    public String toString(){
+        return this.name + " {color : " + this.color + ", " + this.score + " ]";
+    }
 }

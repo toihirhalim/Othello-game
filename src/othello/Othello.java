@@ -5,8 +5,7 @@
  */
 package othello;
 
-import metier.Game;
-import metier.Move;
+import metier.*;
 import java.util.Scanner;
 /**
  *
@@ -35,9 +34,7 @@ public class Othello {
         }
         
         game.print();
-        System.out.println(game.winner() + " is the winner !!");
-        //System.out.println("3 2 " + game.getColor(4,2) + " possible ?  " + game.checkpossibilities("w", 4, 2, 0, 1, 0, true));
-        //game.print();
+        System.out.println(game.winner());
     }
     
 }
