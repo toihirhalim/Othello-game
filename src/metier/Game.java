@@ -12,6 +12,9 @@ import java.util.ArrayList;
  * @author Toihir
  */
 public class Game {
+    static int ids = 0;
+    
+    int id;
     String [][] board;
     Player whitePlayer = new Player("w");
     Player blackPlayer = new Player("b");
@@ -52,6 +55,7 @@ public class Game {
             {"_", "_", "_", "_", "_", "_", "_", "_"},
             {"_", "_", "_", "_", "_", "_", "_", "_"}
         };
+        this.id = ++ids;
         this.board = newBoard;
         this.blackPlayNow = blackPlayNow = true;
         this.moves = new ArrayList();

@@ -15,6 +15,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Iterator;
 import java.util.List;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  *
@@ -30,6 +32,9 @@ public class DataBase {
     static void initialize() {
         try {
             lireFichier();
+            try{
+                Game.ids = Integer.parseInt(racine.getChild("numberGames").getText());
+            }catch(Exception e){}
         }catch(Exception e) {
             document = new Document();
             racine = new Element(pracine);
@@ -39,6 +44,7 @@ public class DataBase {
     }
     static void enregistre() {
         try {
+            racine.getChild("numberGames").setText("" + Game.ids);
             XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
             sortie.output(document, new FileOutputStream(fichier));
         } catch (java.io.IOException e) {}
@@ -52,28 +58,73 @@ public class DataBase {
     static Element getGame(String id) {
         List<Element> games = racine.getChildren(game);
         Iterator<Element> i = games.iterator();
-        
+        Element last = null;
         while (i.hasNext()) {
             Element courant = (Element) i.next();
-            if(id != null && id.equals("0")) return courant;
+            if (id != null && id.equals("0")){
+                last = courant;
+            }
             String att = courant.getAttributeValue("id");
             if (id != null && id.equals(att)) {
                 return courant;
             }
         }
-        return null;
+        return last;
     }
     
-    static Element getLastGame() {
-        List<Element> games = racine.getChildren(game);
-        Iterator<Element> i = games.iterator();
-        int count = 0;
-        Element courant = null;
-        while (i.hasNext()) {
-            courant = (Element) i.next();
-            count++;
+    static List<Move> toGame(Element game){
+        try{
+            List<Element> nodesElement = game.getChildren("node");
+            Iterator<Element> i = nodesElement.iterator();
+            
+            String n = game.getAttributeValue("id");
+            int N = Integer.parseInt(n);
+            List<Move> moves = new ArrayList();
+            while (i.hasNext()) {
+                Element courant = (Element) i.next();
+                String x = courant.getChild("iIndex").getText();
+                String y = courant.getChild("jIndex").getText();
+                String color = courant.getChild("color").getText();
+                
+                int row = Integer.parseInt(x);
+                int col = Integer.parseInt(y);
+                
+                moves.add(0, new Move(row, col, color));
+            }
+            return moves;
+        }catch(Exception e){
+            return null;
         }
-        //update game static numberGames
-        return courant;
     }
+
+    static boolean ajouterGame(List<Move> moves, int id) {
+        try {
+            String Id = "" + id;
+            Element game = getGame(Id);
+            if(game != null){
+                racine.removeContent(game);
+            }
+            game = new Element("game");
+            Attribute idGame = new Attribute("id", "" + Id);
+            game.setAttribute(idGame);
+            for(int i = 0; i  < moves.size() ; i++){
+                Element move = new Element("node");
+                game.addContent(move);
+                
+                Element x = new Element("iIndex");
+                Element y = new Element("jIndex");
+                Element color = new Element("color");
+                
+                move.addContent(x);
+                move.addContent(y);
+                move.addContent(color);
+            }
+            racine.addContent(game);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+
 }
