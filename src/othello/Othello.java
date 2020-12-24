@@ -5,17 +5,33 @@
  */
 package othello;
 
+import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.GridLayout;
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
+
+import metier.*;
+
 /**
  *
  * @author Toihir
  */
 public class Othello extends javax.swing.JFrame {
 
+    Game game;
     /**
      * Creates new form Othello
      */
     public Othello() {
         initComponents();
+        game = new Game();
+        game.newGame();
+        gameBoardPanel = new JPanel();
+        gameBoardPanel.setBounds(0, 0, 360, 360);
+        gameBoardPanel.setBackground(new Color(0, 153, 102));
+        jPanel5.add(gameBoardPanel);
+        print();
     }
 
     /**
@@ -62,9 +78,9 @@ public class Othello extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel2.setBackground(new java.awt.Color(255, 153, 0));
+        jPanel2.setBackground(new java.awt.Color(102, 102, 102));
 
-        jPanel4.setBackground(new java.awt.Color(51, 0, 51));
+        jPanel4.setBackground(new java.awt.Color(51, 51, 51));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -77,7 +93,7 @@ public class Othello extends javax.swing.JFrame {
             .addGap(0, 72, Short.MAX_VALUE)
         );
 
-        jPanel5.setBackground(new java.awt.Color(51, 255, 51));
+        jPanel5.setBackground(new java.awt.Color(102, 102, 102));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -90,7 +106,7 @@ public class Othello extends javax.swing.JFrame {
             .addGap(0, 360, Short.MAX_VALUE)
         );
 
-        jPanel6.setBackground(new java.awt.Color(51, 0, 51));
+        jPanel6.setBackground(new java.awt.Color(51, 51, 51));
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -134,10 +150,25 @@ public class Othello extends javax.swing.JFrame {
         });
 
         jButton2.setText("New Game 2 Player");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("show Best Move");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Back");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -195,6 +226,42 @@ public class Othello extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void print(){
+        String [][] board= game.getBoard();
+        Color boardColor = new Color(0, 188, 140);
+        Border blackline = BorderFactory.createLineBorder(Color.black);
+        
+        gameBoardPanel.removeAll();
+        gameBoardPanel.revalidate();
+        gameBoardPanel.repaint();
+        //gameBoardPanel.setBorder(blackline);
+        
+        for(int i = 0 ; i < 8; i++){
+            for(int j = 0; j < 8; j++){
+                JPanel casePanel = new JPanel();
+                casePanel.setBackground(boardColor);
+                casePanel.setLayout(null);
+                casePanel.setBorder(blackline);
+                casePanel.setBounds(0, 0, 45, 45);
+                
+                
+                gameBoardPanel.add(casePanel);
+            }
+        }
+        gameBoardPanel.setLayout(new GridLayout(8,8));
+    }
     /**
      * @param args the command line arguments
      */
@@ -230,6 +297,7 @@ public class Othello extends javax.swing.JFrame {
         });
     }
 
+    private JPanel gameBoardPanel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

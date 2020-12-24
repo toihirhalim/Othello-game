@@ -178,5 +178,7 @@ public class Game {
     public String getPlayerColor(){
         return blackPlayNow ? "b" : "w";
     }
-
+    public String [][] getBoard(){
+        return this.board;
+    }
 }
