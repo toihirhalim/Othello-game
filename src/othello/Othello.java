@@ -17,6 +17,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
+import java.util.Random;
 
 import metier.*;
 
@@ -27,6 +28,8 @@ import metier.*;
 public class Othello extends javax.swing.JFrame {
 
     Game game;
+    Random rd = new Random();
+    boolean playWithComputer = true;
     /**
      * Creates new form Othello
      */
@@ -231,11 +234,16 @@ public class Othello extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        game.newGame();
+        playWithComputer = true;
+        print();
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         game.newGame();
+        playWithComputer = false;
         print();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -254,6 +262,14 @@ public class Othello extends javax.swing.JFrame {
         game.playMove(move);
         
         print();
+        
+        if(playWithComputer){
+            Move [] moves = game.getPossibleMoves();
+            int size = moves.length;
+            
+            game.playMove(moves[rd.nextInt(size)]);
+            print();
+        }
         
         if(game.gameOver()){
             //new dialog
