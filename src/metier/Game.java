@@ -57,7 +57,7 @@ public class Game {
         };
         this.id = ++ids;
         this.board = newBoard;
-        this.blackPlayNow = blackPlayNow = true;
+        this.blackPlayNow = true;
         String color = blackPlayNow ? "b" : "w";
         playerPossibleMoves = possibleMoves(color);
         this.moves = new ArrayList();
@@ -156,7 +156,7 @@ public class Game {
         
         if(playerPossibleMoves.length == 0){
             color = blackPlayNow ? "w" : "b";
-            //blackPlayNow = !blackPlayNow;
+            blackPlayNow = !blackPlayNow;
             playerPossibleMoves = possibleMoves(color);
             if(playerPossibleMoves.length == 0) return false;
         }
