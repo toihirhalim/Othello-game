@@ -13,6 +13,8 @@ import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.LayoutManager;
 import java.awt.RenderingHints;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 
@@ -243,6 +245,19 @@ public class Othello extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void play(int i, int j){
+        String color = game.blackPlayNow() ? "b" : "w";
+        Move move = new Move(i, j, color);
+        
+        game.playMove(move);
+        
+        print();
+        
+        if(game.gameOver()){
+            //new dialog
+        }
+    }
+    
     private void print(){
         String [][] board= game.getBoard();
         Border blackline = BorderFactory.createLineBorder(Color.black);
@@ -276,6 +291,20 @@ public class Othello extends javax.swing.JFrame {
                     final int x = i;
                     final int y = j;
                     
+                    circle.addMouseListener(new MouseAdapter() {
+                        int i = x;
+                        int j = y;
+
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+                            
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent e) {
+                            play(i, j);
+                        }
+                    });
                     
                 }
                 

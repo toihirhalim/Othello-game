@@ -134,6 +134,9 @@ public class Game {
         test = checkpossibilities(color, i, j, 0, 1, 0, true);
         previous = test ? true : previous;
         
+        color = color.equals("b") ? "w" : "b";
+        
+        playerPossibleMoves = possibleMoves(color);
         if(!previous) return false;
         
         evaluateScore();
