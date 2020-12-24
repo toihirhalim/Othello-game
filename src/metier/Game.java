@@ -58,6 +58,8 @@ public class Game {
         this.id = ++ids;
         this.board = newBoard;
         this.blackPlayNow = blackPlayNow = true;
+        String color = blackPlayNow ? "b" : "w";
+        playerPossibleMoves = possibleMoves(color);
         this.moves = new ArrayList();
         this.boards = new ArrayList();
         return newBoard;
@@ -104,8 +106,6 @@ public class Game {
         Move [] possibleMoves = new Move[m.size()];
         for(int i = 0; i < possibleMoves.length; i++){
             possibleMoves[i] = m.get(i);
-            
-            System.out.println(possibleMoves[i]);
         }
         
         return possibleMoves;
@@ -153,7 +153,7 @@ public class Game {
         
         if(playerPossibleMoves.length == 0){
             color = blackPlayNow ? "w" : "b";
-            
+            //blackPlayNow = !blackPlayNow;
             playerPossibleMoves = possibleMoves(color);
             if(playerPossibleMoves.length == 0) return false;
         }
@@ -180,5 +180,17 @@ public class Game {
     }
     public String [][] getBoard(){
         return this.board;
+    }
+    public boolean blackPlayNow(){
+        return blackPlayNow;
+    }
+    public Move [] getPossibleMoves(){
+        return playerPossibleMoves;
+    }
+    public boolean isPossibleMove(int x, int y){
+        for(int i = 0; i < playerPossibleMoves.length; i++){
+            if(playerPossibleMoves[i].i== x && playerPossibleMoves[i].j == y) return true;
+        }
+        return false;
     }
 }

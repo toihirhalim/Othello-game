@@ -7,7 +7,12 @@ package othello;
 
 import javax.swing.JPanel;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.awt.LayoutManager;
+import java.awt.RenderingHints;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 
@@ -29,7 +34,7 @@ public class Othello extends javax.swing.JFrame {
         game.newGame();
         gameBoardPanel = new JPanel();
         gameBoardPanel.setBounds(0, 0, 360, 360);
-        gameBoardPanel.setBackground(new Color(0, 153, 102));
+        gameBoardPanel.setBackground(new Color(0, 188, 140));
         jPanel5.add(gameBoardPanel);
         print();
     }
@@ -240,22 +245,39 @@ public class Othello extends javax.swing.JFrame {
 
     private void print(){
         String [][] board= game.getBoard();
-        Color boardColor = new Color(0, 188, 140);
         Border blackline = BorderFactory.createLineBorder(Color.black);
-        
+        Color blackColor = new Color(48, 48, 48);
+        Color whiteColor = Color.white;
         gameBoardPanel.removeAll();
         gameBoardPanel.revalidate();
         gameBoardPanel.repaint();
-        //gameBoardPanel.setBorder(blackline);
-        
+        Move [] possibleMoves = game.getPossibleMoves();
         for(int i = 0 ; i < 8; i++){
             for(int j = 0; j < 8; j++){
                 JPanel casePanel = new JPanel();
-                casePanel.setBackground(boardColor);
-                casePanel.setLayout(null);
+                casePanel.setBackground(null);
                 casePanel.setBorder(blackline);
-                casePanel.setBounds(0, 0, 45, 45);
-                
+                casePanel.setLayout(null);
+                if(board[i][j].equals("w")){
+                    JPanel circle = new RoundedPanel(35, whiteColor);
+                    circle.setBackground(null);
+                    circle.setBounds(5, 5, 35, 35);
+                    casePanel.add(circle);
+                }else if(board[i][j].equals("b")){
+                    JPanel circle = new RoundedPanel(35, blackColor);
+                    circle.setBackground(null);
+                    circle.setBounds(5, 5, 35, 35);
+                    casePanel.add(circle);
+                }else if(game.isPossibleMove(i, j)){
+                    JPanel circle = new RoundedPanel(35, null);
+                    circle.setBackground(null);
+                    circle.setBounds(5, 5, 35, 35);
+                    casePanel.add(circle);
+                    final int x = i;
+                    final int y = j;
+                    
+                    
+                }
                 
                 gameBoardPanel.add(casePanel);
             }
@@ -311,4 +333,50 @@ public class Othello extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+
+    class RoundedPanel extends JPanel
+    {
+        private Color backgroundColor;
+        private Color borderColor = new Color(136,136,136);
+        private int cornerRadius = 15;
+        public RoundedPanel(LayoutManager layout, int radius) {
+            super(layout);
+            cornerRadius = radius;
+        }
+        public RoundedPanel(LayoutManager layout, int radius, Color bgColor) {
+            super(layout);
+            cornerRadius = radius;
+            backgroundColor = bgColor;
+        }
+        public RoundedPanel(int radius) {
+            super();
+            cornerRadius = radius;
+            
+        }
+        public RoundedPanel(int radius, Color bgColor) {
+            super();
+            cornerRadius = radius;
+            backgroundColor = bgColor;
+        }
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            Dimension arcs = new Dimension(cornerRadius, cornerRadius);
+            int width = getWidth();
+            int height = getHeight();
+            Graphics2D graphics = (Graphics2D) g;
+            graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            //Draws the rounded panel with borders.
+            if (backgroundColor != null) {
+                graphics.setColor(backgroundColor);
+            } else {
+                graphics.setColor(getBackground());
+            }
+            graphics.fillRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); //paint background
+            graphics.setColor(getForeground());
+            graphics.drawRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); //paint border
+             
+        }
+    }
+    
 }
