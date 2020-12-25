@@ -39,14 +39,15 @@ public class Othello extends javax.swing.JFrame {
     public Othello() {
         initComponents();
         game = new Game();
-        game.newGame();
         gameBoardPanel = new JPanel();
         gameBoardPanel.setBounds(0, 0, 360, 360);
         gameBoardPanel.setBackground(new Color(0, 188, 140));
         jPanel5.add(gameBoardPanel);
-        print();
+        timer = new Timer(delay, taskPerformer);
+        timer.start();
+        initGame();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -105,17 +106,20 @@ public class Othello extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(51, 51, 51));
 
-        whiteTimeLabel.setText("jLabel2");
+        whiteTimeLabel.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        whiteTimeLabel.setText("10 : 00");
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(whiteTimeLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(whiteTimeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(whiteTimeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+            .addComponent(whiteTimeLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
         );
 
         whiteNameLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -194,17 +198,21 @@ public class Othello extends javax.swing.JFrame {
             .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        blackTimeLabel.setText("jLabel3");
+        blackTimeLabel.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        blackTimeLabel.setText("10 : 00");
 
         javax.swing.GroupLayout blackTimePanelLayout = new javax.swing.GroupLayout(blackTimePanel);
         blackTimePanel.setLayout(blackTimePanelLayout);
         blackTimePanelLayout.setHorizontalGroup(
             blackTimePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(blackTimeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, blackTimePanelLayout.createSequentialGroup()
+                .addContainerGap(12, Short.MAX_VALUE)
+                .addComponent(blackTimeLabel)
+                .addContainerGap())
         );
         blackTimePanelLayout.setVerticalGroup(
             blackTimePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(blackTimeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+            .addComponent(blackTimeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
         );
 
         blackNameLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -226,7 +234,7 @@ public class Othello extends javax.swing.JFrame {
                 .addComponent(blackPointsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(blackTimePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addGap(21, 21, 21))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -349,17 +357,14 @@ public class Othello extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        game.newGame();
         playWithComputer = true;
-        print();
-        
+        initGame();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        game.newGame();
         playWithComputer = false;
-        print();
+        initGame();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -447,6 +452,16 @@ public class Othello extends javax.swing.JFrame {
         }
         gameBoardPanel.setLayout(new GridLayout(8,8));
     }
+    
+    private void initGame(){
+        timer.stop();
+        game.newGame();
+        whiteCountDown = new CountDown(10,0);
+        blackCountDown = new CountDown(10,0);
+        print();
+        timer.start();
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -485,11 +500,19 @@ public class Othello extends javax.swing.JFrame {
     int delay = 1000;
     ActionListener taskPerformer = new ActionListener() {
         public void actionPerformed(ActionEvent evt) {
-            System.out.println("hello");
+            if(game.blackPlayNow()){
+                blackCountDown.removeSec(1);
+                blackTimeLabel.setText(blackCountDown.toString());
+            }else{
+                whiteCountDown.removeSec(1);
+                whiteTimeLabel.setText(whiteCountDown.toString());
+            }
         }
     };
     
-    private Timer timer = new Timer(delay, taskPerformer);
+    private CountDown whiteCountDown;
+    private CountDown blackCountDown;
+    private Timer timer;
     private JPanel gameBoardPanel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel blackNameLabel;
@@ -561,4 +584,34 @@ public class Othello extends javax.swing.JFrame {
         }
     }
     
+    class CountDown {
+        public int min;
+        public int sec;
+        
+        public CountDown(){
+            
+        }
+        
+        public CountDown(int min, int sec){
+            this.min = min;
+            this.sec = sec;
+        }
+        public void removeSec(int sec){
+            if(this.sec - sec >= 0){
+                this.sec -= sec;
+            }else {
+                min--;
+                this.sec += 60 - sec;
+            }
+            
+            if(this.min <= 0) this.min = 0;
+            if(this.sec <= 0) this.sec = 0;
+        }
+        
+        public String toString(){
+            String min = this.min >= 10 ? "" + this.min : "0" + this.min;
+            String sec = this.sec >= 10 ? "" + this.sec : "0" + this.sec;
+            return min + " : " + sec;
+        }
+    }
 }
