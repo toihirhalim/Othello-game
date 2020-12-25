@@ -20,8 +20,9 @@ public class Game {
     public Player blackPlayer = new Player("b");
     boolean blackPlayNow = true;
     Move [] playerPossibleMoves;
+    Move lastMove;
     List<Move> moves;
-    List<Object> boards;
+    List<String [][]> boards;
     
     public boolean checkpossibilities(String color, int i, int j, int iDir, int jDir, int round, boolean colorMode){
         
@@ -62,6 +63,7 @@ public class Game {
         playerPossibleMoves = possibleMoves(color);
         this.moves = new ArrayList();
         this.boards = new ArrayList();
+        boards.add(board);
         return newBoard;
     }
     public void evaluateScore(){
@@ -146,7 +148,7 @@ public class Game {
         evaluateScore();
         moves.add(move);
         boards.add(board);
-        
+        lastMove = move;
         blackPlayNow = !blackPlayNow;
             
         return previous;
@@ -200,4 +202,26 @@ public class Game {
         }
         return false;
     }
+    public boolean gameBack(){
+        
+        
+        /*if(boards.size() > 1 && moves.size() > 0){
+            
+            boards.remove(boards.size() - 1);
+            moves.remove(moves.size() - 1);
+            
+            this.board = boards.get(boards.size() - 1);
+            this.lastMove = moves.size() > 0 ? moves.get(moves.size() -1) : null;
+            
+            blackPlayNow = !blackPlayNow;
+            playerPossibleMoves = possibleMoves(getPlayerColor());
+            
+            return true;
+        }*/
+        return false;
+    }
+    public Move getLastMove(){
+        return this.lastMove;
+    }
+
 }

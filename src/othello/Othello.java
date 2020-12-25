@@ -378,7 +378,7 @@ public class Othello extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        if(game.gameBack()) print();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void play(int i, int j){
@@ -414,7 +414,7 @@ public class Othello extends javax.swing.JFrame {
     private void print(){
         String [][] board= game.getBoard();
         Border blackline = BorderFactory.createLineBorder(Color.black);
-        
+        Move lastMove = game.getLastMove();
         gameBoardPanel.removeAll();
         gameBoardPanel.revalidate();
         gameBoardPanel.repaint();
@@ -429,11 +429,25 @@ public class Othello extends javax.swing.JFrame {
                     circle.setBackground(null);
                     circle.setBounds(5, 5, 35, 35);
                     casePanel.add(circle);
+                    if(lastMove != null && lastMove.i == i && lastMove.j == j){
+                        /*JPanel redDot = new RoundedPanel(5, Color.red);
+                        redDot.setBackground(null);
+                        redDot.setBorder(null);
+                        redDot.setBounds(50, 50, 5, 5);
+                        
+                        circle.add(redDot);*/
+                    }
                 }else if(board[i][j].equals("b")){
                     JPanel circle = new RoundedPanel(35, blackColor);
                     circle.setBackground(null);
                     circle.setBounds(5, 5, 35, 35);
                     casePanel.add(circle);
+                    if(lastMove != null && lastMove.i == i && lastMove.j == j){
+                        /*JPanel redDot = new RoundedPanel(5, Color.red);
+                        redDot.setBackground(null);
+                        redDot.setBounds(55, 55, 5, 5);
+                        circle.add(redDot);*/
+                    }
                 }else if(game.isPossibleMove(i, j)){
                     JPanel circle = new RoundedPanel(35, null);
                     circle.setBackground(null);
