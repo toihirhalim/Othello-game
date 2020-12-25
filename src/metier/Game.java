@@ -22,7 +22,8 @@ public class Game {
     Move [] playerPossibleMoves;
     Move lastMove;
     List<Move> moves;
-    List<String [][]> boards;
+    List<String> boards;
+    
     
     public boolean checkpossibilities(String color, int i, int j, int iDir, int jDir, int round, boolean colorMode){
         
@@ -63,7 +64,7 @@ public class Game {
         playerPossibleMoves = possibleMoves(color);
         this.moves = new ArrayList();
         this.boards = new ArrayList();
-        boards.add(board);
+        boards.add(boardToString(this.board));
         return newBoard;
     }
     public void evaluateScore(){
@@ -147,7 +148,7 @@ public class Game {
         
         evaluateScore();
         moves.add(move);
-        boards.add(board);
+        boards.add(boardToString(board));
         lastMove = move;
         blackPlayNow = !blackPlayNow;
             
@@ -205,23 +206,45 @@ public class Game {
     public boolean gameBack(){
         
         
-        /*if(boards.size() > 1 && moves.size() > 0){
+        if(boards.size() > 1 && moves.size() > 0){
             
             boards.remove(boards.size() - 1);
             moves.remove(moves.size() - 1);
             
-            this.board = boards.get(boards.size() - 1);
+            this.board = stringToBoard(boards.get(boards.size() - 1));
             this.lastMove = moves.size() > 0 ? moves.get(moves.size() -1) : null;
             
             blackPlayNow = !blackPlayNow;
             playerPossibleMoves = possibleMoves(getPlayerColor());
             
             return true;
-        }*/
+        }
         return false;
     }
     public Move getLastMove(){
         return this.lastMove;
     }
-
+    public String boardToString(String [][] board){
+        String str = "";
+        for(int i = 0 ; i < board.length; i++){
+            for(int j = 0; j< board.length; j++){
+                str += board[i][j];
+            }
+        }
+        return str;
+    }
+    public String [][] stringToBoard(String str){
+        if(str.length() == 64){
+            int k = 0;
+            String [][] board = new String[8][8];
+            for(int i = 0 ; i < board.length; i++){
+                for(int j = 0; j< board.length; j++){
+                    board[i][j] = "" + str.charAt(k++);
+                }
+            }
+            return board;
+        }
+        return null;
+    }
+    
 }

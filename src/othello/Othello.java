@@ -430,12 +430,12 @@ public class Othello extends javax.swing.JFrame {
                     circle.setBounds(5, 5, 35, 35);
                     casePanel.add(circle);
                     if(lastMove != null && lastMove.i == i && lastMove.j == j){
-                        /*JPanel redDot = new RoundedPanel(5, Color.red);
+                        circle.setLayout(null);
+                        JPanel redDot = new RoundedPanel(5, Color.red);
                         redDot.setBackground(null);
                         redDot.setBorder(null);
-                        redDot.setBounds(50, 50, 5, 5);
-                        
-                        circle.add(redDot);*/
+                        redDot.setBounds(15, 15, 4, 4);
+                        circle.add(redDot);
                     }
                 }else if(board[i][j].equals("b")){
                     JPanel circle = new RoundedPanel(35, blackColor);
@@ -443,10 +443,12 @@ public class Othello extends javax.swing.JFrame {
                     circle.setBounds(5, 5, 35, 35);
                     casePanel.add(circle);
                     if(lastMove != null && lastMove.i == i && lastMove.j == j){
-                        /*JPanel redDot = new RoundedPanel(5, Color.red);
+                       circle.setLayout(null);
+                        JPanel redDot = new RoundedPanel(5, Color.red);
                         redDot.setBackground(null);
-                        redDot.setBounds(55, 55, 5, 5);
-                        circle.add(redDot);*/
+                        redDot.setBorder(null);
+                        redDot.setBounds(15, 15, 4, 4);
+                        circle.add(redDot);
                     }
                 }else if(game.isPossibleMove(i, j)){
                     JPanel circle = new RoundedPanel(35, null);
@@ -480,6 +482,7 @@ public class Othello extends javax.swing.JFrame {
         
         blackPointsLabel.setText("Score : " +game.blackPlayer.getScore());
         whitePointsLabel.setText("Score : " +game.whitePlayer.getScore());
+        game.printBoardAndMoves();
     }
     
     private void initGame(){
