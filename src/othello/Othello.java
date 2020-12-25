@@ -153,7 +153,7 @@ public class Othello extends javax.swing.JFrame {
                 .addComponent(whitePicturePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(whiteNameLabel)
-                .addGap(51, 51, 51)
+                .addGap(52, 52, 52)
                 .addComponent(whitePointsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -211,13 +211,12 @@ public class Othello extends javax.swing.JFrame {
         blackTimePanelLayout.setHorizontalGroup(
             blackTimePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, blackTimePanelLayout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
-                .addComponent(blackTimeLabel)
-                .addContainerGap())
+                .addContainerGap()
+                .addComponent(blackTimeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE))
         );
         blackTimePanelLayout.setVerticalGroup(
             blackTimePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(blackTimeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+            .addComponent(blackTimeLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
         );
 
         blackNameLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -237,11 +236,11 @@ public class Othello extends javax.swing.JFrame {
                 .addComponent(blackPicturePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(blackNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addComponent(blackPointsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(blackPointsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
                 .addComponent(blackTimePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addGap(22, 22, 22))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -391,11 +390,18 @@ public class Othello extends javax.swing.JFrame {
         print();
         
         if(game.gameOver()){
-            //new dialog
+            gameOver();
+            return;
         }
         
         playComputer();
         
+        if(game.gameOver()){
+            gameOver();
+            return;
+        }
+        
+        print();
     }
     
     private void playComputer(){
@@ -485,6 +491,13 @@ public class Othello extends javax.swing.JFrame {
         whitePicturePanel.add(whiteCircle);
         blackPicturePanel.add(blackCircle);
     }
+    
+    private void gameOver(){
+        timer.stop();
+        System.out.println(game.winner());
+        //new dialog
+    }
+    
     /**
      * @param args the command line arguments
      */

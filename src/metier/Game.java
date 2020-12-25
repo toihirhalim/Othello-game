@@ -112,7 +112,6 @@ public class Game {
     }
     public boolean playMove(Move move){
         if (move == null){
-            
             return false;
         }
         int i = move.i, j = move.j;
@@ -138,6 +137,7 @@ public class Game {
         test = checkpossibilities(color, i, j, 0, 1, 0, true);
         previous = test ? true : previous;
         
+        //prendre la couleur oposant
         color = color.equals("b") ? "w" : "b";
         
         playerPossibleMoves = possibleMoves(color);
@@ -176,8 +176,8 @@ public class Game {
         }
     }
     public String winner(){
-        String winner = whitePlayer.getScore() > blackPlayer.getScore() ? "WhitePlayer" : whitePlayer.getScore() > blackPlayer.getScore() ? "BlackPlayer" : "Draw !!!";
-        return winner.equals("draw !!!")? winner : winner + "won !!!";
+        String winner = whitePlayer.getScore() > blackPlayer.getScore() ? whitePlayer.getName() : whitePlayer.getScore() < blackPlayer.getScore() ? blackPlayer.getName() : "Draw !!!";
+        return winner.equals("draw !!!")? winner : winner + " won !!!";
     }
     public String getColor(int i, int j){
         return board[i][j];

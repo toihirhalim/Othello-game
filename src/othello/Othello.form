@@ -127,7 +127,7 @@
                       <Component id="whitePicturePanel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="whiteNameLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                       <Component id="whitePointsLabel" min="-2" pref="73" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="jPanel10" min="-2" max="-2" attributes="0"/>
@@ -263,11 +263,11 @@
                       <Component id="blackPicturePanel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="blackNameLabel" min="-2" pref="60" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                      <Component id="blackPointsLabel" min="-2" pref="68" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
+                      <Component id="blackPointsLabel" min="-2" pref="68" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                       <Component id="blackTimePanel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -314,15 +314,14 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="12" max="32767" attributes="0"/>
-                          <Component id="blackTimeLabel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
+                          <Component id="blackTimeLabel" pref="67" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="blackTimeLabel" alignment="0" pref="34" max="32767" attributes="0"/>
+                      <Component id="blackTimeLabel" alignment="1" pref="34" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
