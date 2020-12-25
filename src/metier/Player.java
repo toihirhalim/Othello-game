@@ -5,6 +5,8 @@
  */
 package metier;
 
+import java.util.Random;
+
 /**
  *
  * @author Toihir
@@ -16,7 +18,7 @@ public class Player {
     
     static int numPlayers = 1;
     public static int bestScore;
-    
+        
     public Player(){
         this.name = "Player : " + numPlayers++;
     }
@@ -58,6 +60,13 @@ public class Player {
         this.score = score;
     }
     
+    public Move play(String [][] board, Move [] possibleMoves){
+        Random rd = new Random();
+        
+        int size = possibleMoves.length;
+        if(size == 0) return null;
+        return possibleMoves[rd.nextInt(size)];
+    }
     public String toString(){
         return this.name + " {color : " + this.color + ", " + this.score + " ]";
     }

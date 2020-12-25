@@ -16,8 +16,8 @@ public class Game {
     
     int id;
     String [][] board;
-    Player whitePlayer = new Player("w");
-    Player blackPlayer = new Player("b");
+    public Player whitePlayer = new Player("w");
+    public Player blackPlayer = new Player("b");
     boolean blackPlayNow = true;
     Move [] playerPossibleMoves;
     List<Move> moves;
@@ -111,6 +111,10 @@ public class Game {
         return possibleMoves;
     }
     public boolean playMove(Move move){
+        if (move == null){
+            
+            return false;
+        }
         int i = move.i, j = move.j;
         String color = move.color;
         boolean test, previous = false;
