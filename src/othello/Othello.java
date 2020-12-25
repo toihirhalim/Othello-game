@@ -38,13 +38,16 @@ public class Othello extends javax.swing.JFrame {
      */
     public Othello() {
         initComponents();
+        blackColor = new Color(48, 48, 48);
+        whiteColor = Color.white;
         game = new Game();
         gameBoardPanel = new JPanel();
         gameBoardPanel.setBounds(0, 0, 360, 360);
-        gameBoardPanel.setBackground(new Color(0, 188, 140));
+        gameBoardPanel.setBackground(boardColor);
         jPanel5.add(gameBoardPanel);
         timer = new Timer(delay, taskPerformer);
         timer.start();
+        drawProfilesPictures();
         initGame();
     }
     
@@ -126,7 +129,9 @@ public class Othello extends javax.swing.JFrame {
         whiteNameLabel.setForeground(new java.awt.Color(255, 255, 255));
         whiteNameLabel.setText("jLabel1");
 
-        whitePointsLabel.setText("jLabel5");
+        whitePointsLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        whitePointsLabel.setForeground(new java.awt.Color(255, 255, 255));
+        whitePointsLabel.setText("Score : 0");
 
         javax.swing.GroupLayout whitePicturePanelLayout = new javax.swing.GroupLayout(whitePicturePanel);
         whitePicturePanel.setLayout(whitePicturePanelLayout);
@@ -148,8 +153,8 @@ public class Othello extends javax.swing.JFrame {
                 .addComponent(whitePicturePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(whiteNameLabel)
-                .addGap(42, 42, 42)
-                .addComponent(whitePointsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51)
+                .addComponent(whitePointsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
@@ -167,9 +172,9 @@ public class Othello extends javax.swing.JFrame {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(whiteNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(whitePointsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(whitePointsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(21, 21, 21))))
+                        .addGap(17, 17, 17))))
         );
 
         jPanel5.setBackground(new java.awt.Color(0, 153, 102));
@@ -219,7 +224,9 @@ public class Othello extends javax.swing.JFrame {
         blackNameLabel.setForeground(new java.awt.Color(255, 255, 255));
         blackNameLabel.setText("jLabel4");
 
-        blackPointsLabel.setText("jLabel6");
+        blackPointsLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        blackPointsLabel.setForeground(new java.awt.Color(255, 255, 255));
+        blackPointsLabel.setText("Score : 0");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -230,8 +237,8 @@ public class Othello extends javax.swing.JFrame {
                 .addComponent(blackPicturePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(blackNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
-                .addComponent(blackPointsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(blackPointsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(blackTimePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
@@ -401,8 +408,7 @@ public class Othello extends javax.swing.JFrame {
     private void print(){
         String [][] board= game.getBoard();
         Border blackline = BorderFactory.createLineBorder(Color.black);
-        Color blackColor = new Color(48, 48, 48);
-        Color whiteColor = Color.white;
+        
         gameBoardPanel.removeAll();
         gameBoardPanel.revalidate();
         gameBoardPanel.repaint();
@@ -451,6 +457,9 @@ public class Othello extends javax.swing.JFrame {
             }
         }
         gameBoardPanel.setLayout(new GridLayout(8,8));
+        
+        blackPointsLabel.setText("Score : " +game.blackPlayer.getScore());
+        whitePointsLabel.setText("Score : " +game.whitePlayer.getScore());
     }
     
     private void initGame(){
@@ -458,10 +467,24 @@ public class Othello extends javax.swing.JFrame {
         game.newGame();
         whiteCountDown = new CountDown(10,0);
         blackCountDown = new CountDown(10,0);
+        whiteNameLabel.setText(game.whitePlayer.getName());
+        blackNameLabel.setText(game.blackPlayer.getName());
         print();
         timer.start();
     }
     
+    public void drawProfilesPictures(){
+        whitePicturePanel.setBackground(boardColor);
+        blackPicturePanel.setBackground(boardColor);
+        JPanel whiteCircle = new RoundedPanel(40, whiteColor);
+        whiteCircle.setBackground(null);
+        whiteCircle.setBounds(5, 5, 40, 40);
+        JPanel blackCircle = new RoundedPanel(40, blackColor);
+        blackCircle.setBackground(null);
+        blackCircle.setBounds(5, 5, 40, 40);
+        whitePicturePanel.add(whiteCircle);
+        blackPicturePanel.add(blackCircle);
+    }
     /**
      * @param args the command line arguments
      */
@@ -510,6 +533,9 @@ public class Othello extends javax.swing.JFrame {
         }
     };
     
+    private Color boardColor = new Color(0, 188, 140);
+    private Color blackColor = new Color(48, 48, 48);
+    private Color whiteColor = Color.white;
     private CountDown whiteCountDown;
     private CountDown blackCountDown;
     private Timer timer;
