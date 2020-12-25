@@ -378,7 +378,11 @@ public class Othello extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        if(game.gameBack()) print();
+        if(game.gameBack()){
+            if(playWithComputer) game.gameBack();
+            print();
+        }
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void play(int i, int j){
@@ -482,7 +486,6 @@ public class Othello extends javax.swing.JFrame {
         
         blackPointsLabel.setText("Score : " +game.blackPlayer.getScore());
         whitePointsLabel.setText("Score : " +game.whitePlayer.getScore());
-        game.printBoardAndMoves();
     }
     
     private void initGame(){
