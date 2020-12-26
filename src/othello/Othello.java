@@ -109,7 +109,7 @@ public class Othello extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -281,7 +281,7 @@ public class Othello extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
@@ -536,11 +536,11 @@ public class Othello extends javax.swing.JFrame {
     }
     
     private void printOldGames(){
-        for(int i = 0; i < 15; i++){
+        /*for(int i = 0; i < 15; i++){
             JButton b1 = new JButton();
             b1.setText("hi");
             b1.setBounds(25, 25*i*2, 70, 30);
-        }
+        }*/
     }
     
     
@@ -596,15 +596,14 @@ public class Othello extends javax.swing.JFrame {
         
         Random rd = new Random();
         int sec  = 0;
-        int delay = rd.nextInt(4) + 1;
+        int delay = rd.nextInt(3) + 1;
         
         public void actionPerformed(ActionEvent evt) {
             if(sec == delay){
                 sec = 0;
-                delay = rd.nextInt(4) + 1;
+                delay = rd.nextInt(3) + 1;
                 playComputer();
             }
-            
             sec++;
         }
     };
