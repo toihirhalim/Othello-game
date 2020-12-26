@@ -25,26 +25,27 @@ import java.util.ArrayList;
 public class DataBase {
     static Document document;
     static Element racine;
-    static String pracine = "games";
-    static String fichier = "games.xml";
-    static String game = "game";
+    static String pracine = "Othello";
+    static String fichier = "Othello.xml";
     
-    static void initialize() {
+    public static void initialize() {
         try {
             lireFichier();
             try{
-                Game.ids = Integer.parseInt(racine.getChild("numberGames").getText());
+                Game.ids = Integer.parseInt(racine.getChild("serialId").getText());
             }catch(Exception e){}
         }catch(Exception e) {
             document = new Document();
             racine = new Element(pracine);
+            racine.addContent(new Element("serialId"));
+            racine.addContent(new Element("games"));
             document.addContent(racine);
             enregistre();
         }
     }
     static void enregistre() {
         try {
-            racine.getChild("numberGames").setText("" + Game.ids);
+            racine.getChild("serialId").setText("" + Game.ids);
             XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
             sortie.output(document, new FileOutputStream(fichier));
         } catch (java.io.IOException e) {}
@@ -56,7 +57,8 @@ public class DataBase {
     }
     
     static Element getGame(String id) {
-        List<Element> games = racine.getChildren(game);
+        Element GamesElement = racine.getChild("games");
+        List<Element> games = GamesElement.getChildren("games");
         Iterator<Element> i = games.iterator();
         Element last = null;
         while (i.hasNext()) {
@@ -97,29 +99,74 @@ public class DataBase {
         }
     }
 
-    static boolean ajouterGame(List<Move> moves, int id) {
+    public static boolean ajouterGame(Game g) {
         try {
-            String Id = "" + id;
+            String Id = "" + g.id;
             Element game = getGame(Id);
             if(game != null){
-                racine.removeContent(game);
+                racine.getChild("games").removeContent(game);
             }
             game = new Element("game");
             Attribute idGame = new Attribute("id", "" + Id);
             game.setAttribute(idGame);
-            for(int i = 0; i  < moves.size() ; i++){
-                Element move = new Element("node");
-                game.addContent(move);
+            
+            Element moves = new Element("moves");
+            Element boards = new Element("boards");
+            Element parameters = new Element("parameters");
+            
+            parameters.addContent(new Element("playWithComputer", "" + g.playWithComputer));
+            parameters.addContent(new Element("blackPlayNow", "" + g.blackPlayNow));
+            Element players = new Element("players");
+            
+            
+            Element blackPlayer = new Element("blackPlayer");
+            Element whitePlayer = new Element("whitePlayer");
+            
+            blackPlayer.addContent(new Element("name", g.blackPlayer.getName()));
+            blackPlayer.addContent(new Element("name", "" + g.blackPlayer.getScore()));
+            
+            
+            whitePlayer.addContent(new Element("name", g.whitePlayer.getName()));
+            whitePlayer.addContent(new Element("name", "" + g.whitePlayer.getScore()));
+            
+            players.addContent(blackPlayer);
+            players.addContent(whitePlayer);
+            
+            /*int id = 1;
+            for(Move m : g.moves){
+                Element move = new Element("move");
                 
-                Element x = new Element("iIndex");
-                Element y = new Element("jIndex");
-                Element color = new Element("color");
+                Attribute idAttribute = new Attribute("id", "" + id++);
                 
+                Element x = new Element("iIndex", "" + m.i);
+                Element y = new Element("jIndex", "" + m.j);
+                Element color = new Element("color", m.color);
+                
+                move.setAttribute(idAttribute);
                 move.addContent(x);
                 move.addContent(y);
                 move.addContent(color);
+                
+                moves.addContent(move);
             }
-            racine.addContent(game);
+            id = 1;
+            for(String b : g.boards){
+                Element board = new Element("board");
+                
+                Attribute idAttribute = new Attribute("id", "" + id++);
+                
+                board.setText(b);
+                board.setAttribute(idAttribute);
+                
+                boards.addContent(board);
+            }*/
+            
+            game.addContent(parameters);
+            game.addContent(moves);
+            game.addContent(boards);
+            
+            racine.getChild("games").addContent(game);
+            enregistre();
         } catch (Exception e) {
             return false;
         }

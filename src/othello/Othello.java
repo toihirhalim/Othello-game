@@ -428,6 +428,7 @@ public class Othello extends javax.swing.JFrame {
             timer1.start();
         }
         
+        DataBase.ajouterGame(game);
     }
     
     private void playComputer(){
@@ -580,7 +581,9 @@ public class Othello extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Othello.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
+        DataBase.initialize();
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
