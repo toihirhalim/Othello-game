@@ -16,15 +16,14 @@ public class Game {
     
     int id;
     String [][] board;
-    public Player whitePlayer = new Player("w");
-    public Player blackPlayer = new Player("b");
+    public Player whitePlayer;
+    public Player blackPlayer;
     public boolean playWithComputer = true;
     boolean blackPlayNow = true;
     Move [] playerPossibleMoves;
     Move lastMove;
     List<Move> moves;
     List<String> boards;
-    
     
     public boolean checkpossibilities(String color, int i, int j, int iDir, int jDir, int round, boolean colorMode){
         
@@ -62,6 +61,9 @@ public class Game {
         this.board = newBoard;
         this.blackPlayNow = true;
         String color = blackPlayNow ? "b" : "w";
+        String Player2 = playWithComputer ? "Computer" : "Player 2";
+        whitePlayer = new Player(Player2, "w");
+        blackPlayer = new Player("Player 1", "b");
         playerPossibleMoves = possibleMoves(color);
         this.moves = new ArrayList();
         this.boards = new ArrayList();

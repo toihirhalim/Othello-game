@@ -201,7 +201,7 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Calibri" size="18" style="1"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="10 : 00"/>
+                    <Property name="text" type="java.lang.String" value="05 : 00"/>
                   </Properties>
                 </Component>
               </SubComponents>

@@ -125,7 +125,7 @@ public class Othello extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(51, 51, 51));
 
         whiteTimeLabel.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
-        whiteTimeLabel.setText("10 : 00");
+        whiteTimeLabel.setText("05 : 00");
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -379,14 +379,12 @@ public class Othello extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         game.playWithComputer = true;
-        game.whitePlayer.setName("Computer");
         initGame();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         game.playWithComputer = false;
-        game.whitePlayer.setName("Player 2");
         initGame();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -478,7 +476,7 @@ public class Othello extends javax.swing.JFrame {
                     casePanel.add(circle);
                     final int x = i;
                     final int y = j;
-                    
+                    if(game.blackPlayNow() || (!game.playWithComputer))
                     circle.addMouseListener(new MouseAdapter() {
                         int i = x;
                         int j = y;
@@ -508,8 +506,8 @@ public class Othello extends javax.swing.JFrame {
     private void initGame(){
         timer.stop();
         game.newGame();
-        whiteCountDown = new CountDown(10,0);
-        blackCountDown = new CountDown(10,0);
+        whiteCountDown = new CountDown(maxTime,0);
+        blackCountDown = new CountDown(maxTime,0);
         whiteNameLabel.setText(game.whitePlayer.getName());
         blackNameLabel.setText(game.blackPlayer.getName());
         print();
@@ -608,6 +606,7 @@ public class Othello extends javax.swing.JFrame {
         }
     };
     
+    private int maxTime = 5;
     private Color boardColor = new Color(0, 188, 140);
     private Color blackColor = new Color(48, 48, 48);
     private Color whiteColor = Color.white;
