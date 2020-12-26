@@ -94,7 +94,7 @@ public class Othello extends javax.swing.JFrame {
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
+            .addGap(0, 198, Short.MAX_VALUE)
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,7 +109,7 @@ public class Othello extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -219,7 +219,7 @@ public class Othello extends javax.swing.JFrame {
         );
 
         blackTimeLabel.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
-        blackTimeLabel.setText("10 : 00");
+        blackTimeLabel.setText("05 : 00");
 
         javax.swing.GroupLayout blackTimePanelLayout = new javax.swing.GroupLayout(blackTimePanel);
         blackTimePanel.setLayout(blackTimePanelLayout);
@@ -534,11 +534,11 @@ public class Othello extends javax.swing.JFrame {
     }
     
     private void printOldGames(){
-        /*for(int i = 0; i < 15; i++){
-            JButton b1 = new JButton();
-            b1.setText("hi");
-            b1.setBounds(25, 25*i*2, 70, 30);
-        }*/
+        jPanel7.setLayout(new GridLayout(15,1));
+        for(int i = 0; i < 15; i++){
+            JButton b1 = new JButton("hi");
+            jPanel7.add(b1);
+        }
     }
     
     
