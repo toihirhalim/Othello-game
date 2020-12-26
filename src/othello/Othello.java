@@ -19,8 +19,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
-import java.util.Random;
 import javax.swing.Timer;
+import javax.swing.JButton;
+import java.util.Random;
 
 import metier.*;
 
@@ -31,8 +32,6 @@ import metier.*;
 public class Othello extends javax.swing.JFrame {
 
     Game game;
-    Random rd = new Random();
-    boolean playWithComputer = true;
     /**
      * Creates new form Othello
      */
@@ -46,9 +45,11 @@ public class Othello extends javax.swing.JFrame {
         gameBoardPanel.setBackground(boardColor);
         jPanel5.add(gameBoardPanel);
         timer = new Timer(delay, taskPerformer);
+        timer1 = new Timer(delay, taskPerformer1);
         timer.start();
         drawProfilesPictures();
         initGame();
+        printOldGames();
     }
     
     /**
@@ -62,6 +63,7 @@ public class Othello extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
+        jPanel7 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
@@ -87,6 +89,19 @@ public class Othello extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
         jScrollPane1.setBackground(new java.awt.Color(0, 102, 255));
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 200, Short.MAX_VALUE)
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 500, Short.MAX_VALUE)
+        );
+
+        jScrollPane1.setViewportView(jPanel7);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -363,13 +378,15 @@ public class Othello extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        playWithComputer = true;
+        game.playWithComputer = true;
+        game.whitePlayer.setName("Computer");
         initGame();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        playWithComputer = false;
+        game.playWithComputer = false;
+        game.whitePlayer.setName("Player 2");
         initGame();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -379,7 +396,7 @@ public class Othello extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         if(game.gameBack()){
-            if(playWithComputer) game.gameBack();
+            if(game.playWithComputer) game.gameBack();
             print();
         }
         
@@ -397,22 +414,22 @@ public class Othello extends javax.swing.JFrame {
             gameOver();
             return;
         }
-        
-        playComputer();
-        
-        if(game.gameOver()){
-            gameOver();
-            return;
+        if(game.playWithComputer){
+            timer1.start();
         }
         
-        print();
     }
     
     private void playComputer(){
-        if(playWithComputer){
+        if(game.playWithComputer){
             game.playMove(game.whitePlayer.play(game.getBoard(), game.possibleMoves("w")));
             print();
+            
+            if(game.gameOver()){
+                gameOver();
+            }
         }
+        timer1.stop();
     }
     
     private void print(){
@@ -518,6 +535,15 @@ public class Othello extends javax.swing.JFrame {
         //new dialog
     }
     
+    private void printOldGames(){
+        for(int i = 0; i < 15; i++){
+            JButton b1 = new JButton();
+            b1.setText("hi");
+            b1.setBounds(25, 25*i*2, 70, 30);
+        }
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -566,12 +592,30 @@ public class Othello extends javax.swing.JFrame {
         }
     };
     
+    ActionListener taskPerformer1 = new ActionListener() {
+        
+        Random rd = new Random();
+        int sec  = 0;
+        int delay = rd.nextInt(4) + 1;
+        
+        public void actionPerformed(ActionEvent evt) {
+            if(sec == delay){
+                sec = 0;
+                delay = rd.nextInt(4) + 1;
+                playComputer();
+            }
+            
+            sec++;
+        }
+    };
+    
     private Color boardColor = new Color(0, 188, 140);
     private Color blackColor = new Color(48, 48, 48);
     private Color whiteColor = Color.white;
     private CountDown whiteCountDown;
     private CountDown blackCountDown;
     private Timer timer;
+    private Timer timer1;
     private JPanel gameBoardPanel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel blackNameLabel;

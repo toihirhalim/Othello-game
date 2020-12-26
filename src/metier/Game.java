@@ -18,6 +18,7 @@ public class Game {
     String [][] board;
     public Player whitePlayer = new Player("w");
     public Player blackPlayer = new Player("b");
+    public boolean playWithComputer = true;
     boolean blackPlayNow = true;
     Move [] playerPossibleMoves;
     Move lastMove;
@@ -217,6 +218,7 @@ public class Game {
             blackPlayNow = !blackPlayNow;
             playerPossibleMoves = possibleMoves(getPlayerColor());
             
+            evaluateScore();
             return true;
         }
         return false;
