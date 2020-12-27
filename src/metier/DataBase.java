@@ -15,7 +15,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Iterator;
 import java.util.List;
-import java.util.List;
 import java.util.ArrayList;
 
 /**
@@ -195,11 +194,45 @@ public class DataBase {
         return true;
     }
 
+    static List<GameItem> listGames(){
+        try{
+            List<GameItem> gameItems = new ArrayList();
+
+            Element gamesElement = racine.getChild("games");
+
+            List<Element> games = gamesElement.getChildren("game");
+            Iterator<Element> i = games.iterator();
+
+            while (i.hasNext()) {
+                Element courant = (Element) i.next();
+                int gameId = Integer.parseInt(courant.getAttributeValue("id"));
+                
+                Element blackPlayer = courant.getChild("parameters").getChild("players").getChild("blackPlayer");
+                Element whitePlayer = courant.getChild("parameters").getChild("players").getChild("whitePlayer");
+                
+                String blackPlayerName = blackPlayer.getChild("blackPlayerName").getText();
+                String whitePlayerName = whitePlayer.getChild("whitePlayerName").getText();
+                
+                int blackPlayerScore = Integer.parseInt(blackPlayer.getChild("blackPlayerScore ").getText());
+                int whitePlayerScore  = Integer.parseInt(whitePlayer.getChild("whitePlayerScore ").getText());
+                
+                gameItems.add(new GameItem(gameId, blackPlayerName, whitePlayerName, blackPlayerScore, whitePlayerScore));
+            }
+            
+            return gameItems;
+        }catch(Exception e){}
+        return null;
+    }
+    
     public static boolean saveGame(Game game){
         if(racine == null) initialize();
         ajouterGame(game);
         enregistre();
         return true;
     }
-
+    public static List<GameItem> listAllGames(){
+        if(racine == null) initialize();
+        
+        return listGames();
+    }
 }
