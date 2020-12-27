@@ -31,10 +31,10 @@ public class GameSearch{
         return score;
     }
     
-    static boolean isMoveLeft(String [][] b){
-        for(int i = 0; i < b.length; i++){
-            for(int j = 0; j < b.length; j++){
-                if(b.equals("_")) return true;
+    static boolean isMoveLeft(String [][] board){
+        for(int i = 0; i < board.length; i++){
+            for(int j = 0; j < board.length; j++){
+                if(board[i][j].equals("_")) return true;
             }
         }
         return false;
@@ -62,7 +62,7 @@ public class GameSearch{
     boards = new ArrayList();
     boards.add(boardToString(board));
     
-    int bestVal = 0; 
+    int bestVal = -1; 
     Move bestMove = null;
   
     // Traverse all cells, evaluate minimax function  
@@ -101,21 +101,11 @@ public class GameSearch{
     static int minimax(String [][] board, int depth, Boolean isMax) 
     { 
         int score = evaluate(board); 
+        
 
-        // If Maximizer has won the game  
-        // return his/her evaluated score 
-        if (score == 10) 
-            return score; 
-
-        // If Minimizer has won the game  
-        // return his/her evaluated score 
-        if (score == -10) 
-            return score; 
-
-        // If there are no more moves and  
-        // no winner then it is a tie 
-        if (isMoveLeft(board) == false) 
-            return 0; 
+        // if game over return the score
+        if (gameOver(board)) 
+            return score;
 
         // If this maximizer's move 
         if (isMax) 
