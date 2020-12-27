@@ -24,7 +24,7 @@ public class GameSearch{
         int score = 0;
         for(int i = 0; i < b.length; i++){
             for(int j = 0; j < b.length; j++){
-                if(b.equals(player)) score++;
+                if(b[i][j].equals(player)) score++;
             }
         }
         
@@ -54,7 +54,7 @@ public class GameSearch{
         return true;
     }
     
-    static Move findBestMove(String [][] board, String color) 
+    public static Move findBestMove(String [][] board, String color) 
 { 
     player = color;
     opponent = player.equals("b") ? "w" : "b";
@@ -77,9 +77,12 @@ public class GameSearch{
         // compute evaluation function for this 
         // move. 
         int moveVal = minimax(board, 0, false); 
-
+        
+        System.out.println("one of the possible moves : " + possibleMoves[i] + ", valeur :" + moveVal);
+        
         // Undo the move 
-         gameBack(board);
+         board = gameBack(board);
+         
 
         // If the value of the current move is 
         // more than the best value, then update 
@@ -91,8 +94,7 @@ public class GameSearch{
         } 
     } 
   
-    System.out.printf("The value of the best Move " +  
-                             "is : %d\n\n", bestVal); 
+    System.out.printf("The value of the best Move is : %d\n\n", bestVal); 
   
     return bestMove; 
 } 
@@ -133,7 +135,7 @@ public class GameSearch{
                                 depth + 1, !isMax)); 
 
                 // Undo the move 
-                gameBack(board);
+                board = gameBack(board);
             } 
             return best; 
         } 
@@ -156,7 +158,7 @@ public class GameSearch{
                                 depth + 1, !isMax)); 
 
                 // Undo the move 
-                gameBack(board); 
+                board = gameBack(board); 
             } 
             return best; 
         } 
@@ -273,20 +275,28 @@ public class GameSearch{
         }
         return null;
     }
-    public static boolean gameBack(String [][] board){
-        
+    public static String [][] gameBack(String [][] board){
         if(boards.size() > 1 && moves.size() > 0){
             
             boards.remove(boards.size() - 1);
             moves.remove(moves.size() - 1);
             
-            board = stringToBoard(boards.get(boards.size() - 1));
-            
-            return true;
+            return stringToBoard(boards.get(boards.size() - 1));
         }
-        return false;
+        return board;
     }
-
+    public static void print(String [][] board){
+        
+        System.out.println("________________");
+        for(int i = 0 ; i < board.length; i++){
+            for(int j = 0; j< board.length; j++){
+                System.out.print(board[i][j] + " ");
+            }
+            System.out.println();
+        }
+        
+        System.out.println("________________");
+    }
 
 
 }
