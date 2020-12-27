@@ -57,8 +57,10 @@ public class DataBase {
     }
     
     static Element getGame(String id) {
-        Element GamesElement = racine.getChild("games");
-        List<Element> games = GamesElement.getChildren("games");
+        
+        Element gamesElement = racine.getChild("games");
+        
+        List<Element> games = gamesElement.getChildren("game");
         Iterator<Element> i = games.iterator();
         Element last = null;
         while (i.hasNext()) {
@@ -66,6 +68,7 @@ public class DataBase {
             if (id != null && id.equals("0")){
                 last = courant;
             }
+            
             String att = courant.getAttributeValue("id");
             if (id != null && id.equals(att)) {
                 return courant;
@@ -99,12 +102,13 @@ public class DataBase {
         }
     }
 
-    public static boolean ajouterGame(Game g) {
+    static boolean ajouterGame(Game g) {
         try {
+            Element gamesElement = racine.getChild("games");
             String Id = "" + g.id;
             Element game = getGame(Id);
             if(game != null){
-                racine.getChild("games").removeContent(game);
+                gamesElement.removeContent(game);
             }
             game = new Element("game");
             Attribute idGame = new Attribute("id", "" + Id);
@@ -114,33 +118,51 @@ public class DataBase {
             Element boards = new Element("boards");
             Element parameters = new Element("parameters");
             
-            parameters.addContent(new Element("playWithComputer", "" + g.playWithComputer));
-            parameters.addContent(new Element("blackPlayNow", "" + g.blackPlayNow));
+            Element playWithComputer = new Element("playWithComputer");
+            playWithComputer.setText("" + g.playWithComputer);
+            
+            Element blackPlayNow = new Element("blackPlayNow");
+            blackPlayNow.setText("" + g.blackPlayNow);
+            
             Element players = new Element("players");
             
             
             Element blackPlayer = new Element("blackPlayer");
+            Element blackPlayerName = new Element("blackPlayerName");
+            blackPlayerName.setText(g.blackPlayer.getName());
+            Element blackPlayerScore = new Element("blackPlayerScore");
+            blackPlayerScore.setText("" + g.blackPlayer.getScore());
+            
             Element whitePlayer = new Element("whitePlayer");
+            Element whitePlayerName = new Element("whitePlayerName");
+            whitePlayerName.setText(g.whitePlayer.getName());
+            Element whitePlayerScore = new Element("whitePlayerScore");
+            whitePlayerScore.setText("" + g.whitePlayer.getScore());
             
-            blackPlayer.addContent(new Element("name", g.blackPlayer.getName()));
-            blackPlayer.addContent(new Element("name", "" + g.blackPlayer.getScore()));
-            
-            
-            whitePlayer.addContent(new Element("name", g.whitePlayer.getName()));
-            whitePlayer.addContent(new Element("name", "" + g.whitePlayer.getScore()));
+            blackPlayer.addContent(blackPlayerName);
+            blackPlayer.addContent(blackPlayerScore);
+            whitePlayer.addContent(whitePlayerName);
+            whitePlayer.addContent(whitePlayerScore);
             
             players.addContent(blackPlayer);
             players.addContent(whitePlayer);
             
-            /*int id = 1;
+            parameters.addContent(playWithComputer);
+            parameters.addContent(blackPlayNow);
+            parameters.addContent(players);
+            
+            int id = 1;
             for(Move m : g.moves){
                 Element move = new Element("move");
                 
                 Attribute idAttribute = new Attribute("id", "" + id++);
                 
-                Element x = new Element("iIndex", "" + m.i);
-                Element y = new Element("jIndex", "" + m.j);
-                Element color = new Element("color", m.color);
+                Element x = new Element("iIndex");
+                x.setText("" + m.i);
+                Element y = new Element("jIndex");
+                y.setText("" + m.j);
+                Element color = new Element("color");
+                color.setText(m.color);
                 
                 move.setAttribute(idAttribute);
                 move.addContent(x);
@@ -149,7 +171,7 @@ public class DataBase {
                 
                 moves.addContent(move);
             }
-            id = 1;
+            id = 0;
             for(String b : g.boards){
                 Element board = new Element("board");
                 
@@ -159,19 +181,25 @@ public class DataBase {
                 board.setAttribute(idAttribute);
                 
                 boards.addContent(board);
-            }*/
+            }
             
             game.addContent(parameters);
             game.addContent(moves);
             game.addContent(boards);
             
-            racine.getChild("games").addContent(game);
-            enregistre();
+            gamesElement.addContent(game);
+            
         } catch (Exception e) {
             return false;
         }
         return true;
     }
 
+    public static boolean saveGame(Game game){
+        if(racine == null) initialize();
+        ajouterGame(game);
+        enregistre();
+        return true;
+    }
 
 }
