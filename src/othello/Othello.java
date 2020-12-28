@@ -455,7 +455,7 @@ public class Othello extends javax.swing.JFrame {
         String b = game.boardToString(game.getBoard());
         String [][] newBoard = game.stringToBoard(b);
         Move bestMove = GameSearch.findBestMove(newBoard, game.getPlayerColor());
-        System.out.println("the best move is : " + bestMove);
+        //System.out.println("the best move is : " + bestMove);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed

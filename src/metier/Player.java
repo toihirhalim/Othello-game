@@ -66,6 +66,7 @@ public class Player {
         int size = possibleMoves.length;
         if(size == 0) return null;
         return possibleMoves[rd.nextInt(size)];
+        //return GameSearch.findBestMove(board, color);
     }
     public String toString(){
         return this.name + " {color : " + this.color + ", " + this.score + " ]";

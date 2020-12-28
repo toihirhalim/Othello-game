@@ -19,6 +19,10 @@ public class GameSearch{
     static List<Move> moves;
     static List<String> boards;
     
+    
+    static int MAX = 1000; 
+    static int MIN = -1000;
+    
     static int evaluate(String [][] b) 
     { 
         int score = 0;
@@ -76,9 +80,8 @@ public class GameSearch{
 
         // compute evaluation function for this 
         // move. 
-        int moveVal = minimax(board, 0, false); 
+        int moveVal = minimax(board, 0, false, MIN, MAX); 
         
-        System.out.println("one of the possible moves : " + possibleMoves[i] + ", valeur :" + moveVal);
         
         // Undo the move 
          board = gameBack(board);
@@ -94,14 +97,15 @@ public class GameSearch{
         } 
     } 
   
-    System.out.printf("The value of the best Move is : %d\n\n", bestVal); 
+    System.out.println("The best move for " + bestMove.color + " is " + bestMove + "with the value " + bestVal); 
   
     return bestMove; 
 } 
-    static int minimax(String [][] board, int depth, Boolean isMax) 
+    static int minimax(String [][] board, int depth, Boolean isMax, int alpha, int beta) 
     { 
         int score = evaluate(board); 
         
+        if(depth > 5) return score;
 
         // if game over return the score
         if (gameOver(board)) 
@@ -121,11 +125,17 @@ public class GameSearch{
 
                 // Call minimax recursively and choose 
                 // the maximum value 
-                best = Math.max(best, minimax(board,  
-                                depth + 1, !isMax)); 
-
+                int val = minimax(board, depth + 1, !isMax, alpha, beta);
+                
+                best = Math.max(best, val); 
+                alpha = Math.max(alpha, best);
+                
                 // Undo the move 
                 board = gameBack(board);
+                
+                // Alpha Beta Pruning 
+                if (beta <= alpha) 
+                    break;
             } 
             return best; 
         } 
@@ -144,19 +154,21 @@ public class GameSearch{
 
                 // Call minimax recursively and choose 
                 // the minimum value 
-                best = Math.min(best, minimax(board,  
-                                depth + 1, !isMax)); 
-
+                int val = minimax(board, depth + 1, !isMax, alpha, beta);
+                
+                best = Math.min(best, val); 
+                beta = Math.min(beta, best); 
+  
                 // Undo the move 
                 board = gameBack(board); 
-            } 
+                
+                // Alpha Beta Pruning 
+                if (beta <= alpha) 
+                    break;
+                } 
             return best; 
         } 
     }
-    
-    
-    
-    
     
     
     public static boolean playMove(String [][] board, Move move){
