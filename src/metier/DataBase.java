@@ -210,11 +210,14 @@ public class DataBase {
                 Element blackPlayer = courant.getChild("parameters").getChild("players").getChild("blackPlayer");
                 Element whitePlayer = courant.getChild("parameters").getChild("players").getChild("whitePlayer");
                 
+                
                 String blackPlayerName = blackPlayer.getChild("blackPlayerName").getText();
                 String whitePlayerName = whitePlayer.getChild("whitePlayerName").getText();
                 
-                int blackPlayerScore = Integer.parseInt(blackPlayer.getChild("blackPlayerScore ").getText());
-                int whitePlayerScore  = Integer.parseInt(whitePlayer.getChild("whitePlayerScore ").getText());
+                
+                int blackPlayerScore = Integer.parseInt(blackPlayer.getChild("blackPlayerScore").getText());
+                int whitePlayerScore  = Integer.parseInt(whitePlayer.getChild("whitePlayerScore").getText());
+                
                 
                 gameItems.add(new GameItem(gameId, blackPlayerName, whitePlayerName, blackPlayerScore, whitePlayerScore));
             }

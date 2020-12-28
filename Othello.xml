@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Othello>
-  <serialId>3</serialId>
+  <serialId>5</serialId>
   <games>
     <game id="1">
       <parameters>
@@ -170,6 +170,351 @@
         <board id="12">______________b___bbbb_____wb______wb_____www____www_w__________</board>
         <board id="13">______________b___bbbb_____wb______bb_____bww____bww_w__b_______</board>
         <board id="14">______________b___bbbb_____wb______bb____wwww____bww_w__b_______</board>
+      </boards>
+    </game>
+    <game id="5">
+      <parameters>
+        <playWithComputer>false</playWithComputer>
+        <blackPlayNow>true</blackPlayNow>
+        <players>
+          <blackPlayer>
+            <blackPlayerName>Player 1</blackPlayerName>
+            <blackPlayerScore>13</blackPlayerScore>
+          </blackPlayer>
+          <whitePlayer>
+            <whitePlayerName>Player 2</whitePlayerName>
+            <whitePlayerScore>45</whitePlayerScore>
+          </whitePlayer>
+        </players>
+      </parameters>
+      <moves>
+        <move id="1">
+          <iIndex>4</iIndex>
+          <jIndex>5</jIndex>
+          <color>b</color>
+        </move>
+        <move id="2">
+          <iIndex>5</iIndex>
+          <jIndex>3</jIndex>
+          <color>w</color>
+        </move>
+        <move id="3">
+          <iIndex>2</iIndex>
+          <jIndex>2</jIndex>
+          <color>b</color>
+        </move>
+        <move id="4">
+          <iIndex>4</iIndex>
+          <jIndex>6</jIndex>
+          <color>w</color>
+        </move>
+        <move id="5">
+          <iIndex>5</iIndex>
+          <jIndex>2</jIndex>
+          <color>b</color>
+        </move>
+        <move id="6">
+          <iIndex>2</iIndex>
+          <jIndex>4</jIndex>
+          <color>w</color>
+        </move>
+        <move id="7">
+          <iIndex>4</iIndex>
+          <jIndex>7</jIndex>
+          <color>b</color>
+        </move>
+        <move id="8">
+          <iIndex>6</iIndex>
+          <jIndex>1</jIndex>
+          <color>w</color>
+        </move>
+        <move id="9">
+          <iIndex>1</iIndex>
+          <jIndex>5</jIndex>
+          <color>b</color>
+        </move>
+        <move id="10">
+          <iIndex>3</iIndex>
+          <jIndex>2</jIndex>
+          <color>w</color>
+        </move>
+        <move id="11">
+          <iIndex>2</iIndex>
+          <jIndex>3</jIndex>
+          <color>b</color>
+        </move>
+        <move id="12">
+          <iIndex>0</iIndex>
+          <jIndex>6</jIndex>
+          <color>w</color>
+        </move>
+        <move id="13">
+          <iIndex>3</iIndex>
+          <jIndex>1</jIndex>
+          <color>b</color>
+        </move>
+        <move id="14">
+          <iIndex>3</iIndex>
+          <jIndex>5</jIndex>
+          <color>w</color>
+        </move>
+        <move id="15">
+          <iIndex>4</iIndex>
+          <jIndex>2</jIndex>
+          <color>b</color>
+        </move>
+        <move id="16">
+          <iIndex>5</iIndex>
+          <jIndex>7</jIndex>
+          <color>w</color>
+        </move>
+        <move id="17">
+          <iIndex>7</iIndex>
+          <jIndex>0</jIndex>
+          <color>b</color>
+        </move>
+        <move id="18">
+          <iIndex>2</iIndex>
+          <jIndex>0</jIndex>
+          <color>w</color>
+        </move>
+        <move id="19">
+          <iIndex>2</iIndex>
+          <jIndex>6</jIndex>
+          <color>b</color>
+        </move>
+        <move id="20">
+          <iIndex>2</iIndex>
+          <jIndex>1</jIndex>
+          <color>w</color>
+        </move>
+        <move id="21">
+          <iIndex>1</iIndex>
+          <jIndex>0</jIndex>
+          <color>b</color>
+        </move>
+        <move id="22">
+          <iIndex>0</iIndex>
+          <jIndex>0</jIndex>
+          <color>w</color>
+        </move>
+        <move id="23">
+          <iIndex>0</iIndex>
+          <jIndex>4</jIndex>
+          <color>b</color>
+        </move>
+        <move id="24">
+          <iIndex>3</iIndex>
+          <jIndex>7</jIndex>
+          <color>w</color>
+        </move>
+        <move id="25">
+          <iIndex>5</iIndex>
+          <jIndex>1</jIndex>
+          <color>b</color>
+        </move>
+        <move id="26">
+          <iIndex>6</iIndex>
+          <jIndex>0</jIndex>
+          <color>w</color>
+        </move>
+        <move id="27">
+          <iIndex>5</iIndex>
+          <jIndex>4</jIndex>
+          <color>b</color>
+        </move>
+        <move id="28">
+          <iIndex>4</iIndex>
+          <jIndex>1</jIndex>
+          <color>w</color>
+        </move>
+        <move id="29">
+          <iIndex>1</iIndex>
+          <jIndex>1</jIndex>
+          <color>b</color>
+        </move>
+        <move id="30">
+          <iIndex>0</iIndex>
+          <jIndex>2</jIndex>
+          <color>w</color>
+        </move>
+        <move id="31">
+          <iIndex>0</iIndex>
+          <jIndex>1</jIndex>
+          <color>b</color>
+        </move>
+        <move id="32">
+          <iIndex>6</iIndex>
+          <jIndex>3</jIndex>
+          <color>w</color>
+        </move>
+        <move id="33">
+          <iIndex>5</iIndex>
+          <jIndex>0</jIndex>
+          <color>b</color>
+        </move>
+        <move id="34">
+          <iIndex>1</iIndex>
+          <jIndex>3</jIndex>
+          <color>w</color>
+        </move>
+        <move id="35">
+          <iIndex>0</iIndex>
+          <jIndex>3</jIndex>
+          <color>b</color>
+        </move>
+        <move id="36">
+          <iIndex>1</iIndex>
+          <jIndex>2</jIndex>
+          <color>w</color>
+        </move>
+        <move id="37">
+          <iIndex>1</iIndex>
+          <jIndex>4</jIndex>
+          <color>b</color>
+        </move>
+        <move id="38">
+          <iIndex>2</iIndex>
+          <jIndex>5</jIndex>
+          <color>w</color>
+        </move>
+        <move id="39">
+          <iIndex>3</iIndex>
+          <jIndex>0</jIndex>
+          <color>b</color>
+        </move>
+        <move id="40">
+          <iIndex>4</iIndex>
+          <jIndex>0</jIndex>
+          <color>w</color>
+        </move>
+        <move id="41">
+          <iIndex>1</iIndex>
+          <jIndex>6</jIndex>
+          <color>b</color>
+        </move>
+        <move id="42">
+          <iIndex>0</iIndex>
+          <jIndex>5</jIndex>
+          <color>w</color>
+        </move>
+        <move id="43">
+          <iIndex>7</iIndex>
+          <jIndex>3</jIndex>
+          <color>b</color>
+        </move>
+        <move id="44">
+          <iIndex>3</iIndex>
+          <jIndex>6</jIndex>
+          <color>w</color>
+        </move>
+        <move id="45">
+          <iIndex>2</iIndex>
+          <jIndex>7</jIndex>
+          <color>b</color>
+        </move>
+        <move id="46">
+          <iIndex>1</iIndex>
+          <jIndex>7</jIndex>
+          <color>w</color>
+        </move>
+        <move id="47">
+          <iIndex>0</iIndex>
+          <jIndex>7</jIndex>
+          <color>b</color>
+        </move>
+        <move id="48">
+          <iIndex>7</iIndex>
+          <jIndex>1</jIndex>
+          <color>w</color>
+        </move>
+        <move id="49">
+          <iIndex>6</iIndex>
+          <jIndex>2</jIndex>
+          <color>b</color>
+        </move>
+        <move id="50">
+          <iIndex>7</iIndex>
+          <jIndex>2</jIndex>
+          <color>w</color>
+        </move>
+        <move id="51">
+          <iIndex>5</iIndex>
+          <jIndex>5</jIndex>
+          <color>b</color>
+        </move>
+        <move id="52">
+          <iIndex>6</iIndex>
+          <jIndex>5</jIndex>
+          <color>w</color>
+        </move>
+        <move id="53">
+          <iIndex>6</iIndex>
+          <jIndex>6</jIndex>
+          <color>b</color>
+        </move>
+        <move id="54">
+          <iIndex>7</iIndex>
+          <jIndex>7</jIndex>
+          <color>w</color>
+        </move>
+      </moves>
+      <boards>
+        <board id="0">___________________________wb______bw___________________________</board>
+        <board id="1">___________________________wb______bbb__________________________</board>
+        <board id="2">___________________________wb______wbb_____w____________________</board>
+        <board id="3">__________________b________bb______wbb_____w____________________</board>
+        <board id="4">__________________b________bb______wwww____w____________________</board>
+        <board id="5">__________________b________bb______bwww___bw____________________</board>
+        <board id="6">__________________b_w______bw______bwww___bw____________________</board>
+        <board id="7">__________________b_w______bw______bbbbb__bw____________________</board>
+        <board id="8">__________________b_w______bw______wbbbb__ww_____w______________</board>
+        <board id="9">_____________b____b_b______bw______wbbbb__ww_____w______________</board>
+        <board id="10">_____________b____b_b_____www______wbbbb__ww_____w______________</board>
+        <board id="11">_____________b____bbb_____wwb______wbbbb__ww_____w______________</board>
+        <board id="12">______w______w____bbw_____wwb______wbbbb__ww_____w______________</board>
+        <board id="13">______w______w____bbw____bbbb______wbbbb__ww_____w______________</board>
+        <board id="14">______w______w____bbw____bbbbw_____wwbbb__ww_____w______________</board>
+        <board id="15">______w______w____bbw____bbbbw____bbbbbb__ww_____w______________</board>
+        <board id="16">______w______w____bbw____bbbbw____bbbbwb__ww___w_w______________</board>
+        <board id="17">______w______w____bbw____bbbbw____bbbbwb__bw___w_b______b_______</board>
+        <board id="18">______w______w__w_bbw____wbbbw____wbbbwb__bw___w_b______b_______</board>
+        <board id="19">______w______w__w_bbw_b__wbbbb____wbbbwb__bw___w_b______b_______</board>
+        <board id="20">______w______w__wwwww_b__wbbbb____wbbbwb__bw___w_b______b_______</board>
+        <board id="21">______w_b____w__wbwww_b__wbbbb____wbbbwb__bw___w_b______b_______</board>
+        <board id="22">w_____w_w____w__wbwww_b__wbbbb____wbbbwb__bw___w_b______b_______</board>
+        <board id="23">w___b_w_w____b__wbwww_b__wbbbb____wbbbwb__bw___w_b______b_______</board>
+        <board id="24">w___b_w_w____b__wbwww_b__wbbbb_w__wbbbww__bw___w_b______b_______</board>
+        <board id="25">w___b_w_w____b__wbwww_b__wbbbb_w__bbbbww_bbw___w_b______b_______</board>
+        <board id="26">w___b_w_w____b__wbwww_b__wbwbb_w__wbbbww_wbw___wwb______b_______</board>
+        <board id="27">w___b_w_w____b__wbwww_b__wbwbb_w__wbbbww_wbbb__wwb______b_______</board>
+        <board id="28">w___b_w_w____b__wbwww_b__wwwbb_w_wwbbbww_wbbb__wwb______b_______</board>
+        <board id="29">w___b_w_wb___b__wbbww_b__wwbbb_w_wwbbbww_wbbb__wwb______b_______</board>
+        <board id="30">w_w_b_w_ww___b__wbbww_b__wwbbb_w_wwbbbww_wbbb__wwb______b_______</board>
+        <board id="31">wbw_b_w_wb___b__wbbww_b__wwbbb_w_wwbbbww_wbbb__wwb______b_______</board>
+        <board id="32">wbw_b_w_wb___b__wbbww_b__wwwbb_w_wwwbbww_wwwb__wwb_w____b_______</board>
+        <board id="33">wbw_b_w_wb___b__wbbww_b__wwwbb_w_wwwbbwwbbbbb__wbb_w____b_______</board>
+        <board id="34">wbw_b_w_wb_w_b__wbwww_b__wwwbb_w_wwwbbwwbbbbb__wbb_w____b_______</board>
+        <board id="35">wbbbb_w_wb_b_b__wbwbw_b__wwbbb_w_wwbbbwwbbbbb__wbb_w____b_______</board>
+        <board id="36">wbbbb_w_wwwb_b__wbwbw_b__wwbbb_w_wwbbbwwbbbbb__wbb_w____b_______</board>
+        <board id="37">wbbbb_w_wwwbbb__wbwbb_b__wwbbb_w_wwbbbwwbbbbb__wbb_w____b_______</board>
+        <board id="38">wbbbb_w_wwwbbb__wbwwwwb__wwbbb_w_wwbbbwwbbbbb__wbb_w____b_______</board>
+        <board id="39">wbbbb_w_wwwbbb__wbwwwwb_bbbbbb_w_bwbbbwwbbbbb__wbb_w____b_______</board>
+        <board id="40">wbbbb_w_wwwbbb__wbwwwwb_wwbbbb_wwwwbbbwwbbbbb__wbb_w____b_______</board>
+        <board id="41">wbbbb_w_wwwbbbb_wbwwwbb_wwbbbb_wwwwbbbwwbbbbb__wbb_w____b_______</board>
+        <board id="42">wwwwwww_wwwbwbb_wbwwwbb_wwbbbb_wwwwbbbwwbbbbb__wbb_w____b_______</board>
+        <board id="43">wwwwwww_wwwbwbb_wbwwwbb_wwbbbb_wwwwbbbwwbbbbb__wbb_b____b__b____</board>
+        <board id="44">wwwwwww_wwwbwbw_wbwwwww_wwwwwwwwwwwbbbwwbbbbb__wbb_b____b__b____</board>
+        <board id="45">wwwwwww_wwwbwbw_wbbbbbbbwwwwwwbwwwwbbbwwbbbbb__wbb_b____b__b____</board>
+        <board id="46">wwwwwww_wwwbwbwwwbbbbbwwwwwwwwbwwwwbbbwwbbbbb__wbb_b____b__b____</board>
+        <board id="47">wwwwwwwbwwwbwbbwwbbbbbwwwwwwwwbwwwwbbbwwbbbbb__wbb_b____b__b____</board>
+        <board id="48">wwwwwwwbwwwbwbbwwbbbbbwwwwwwwwbwwwwbbbwwbwbbb__wbw_b____bw_b____</board>
+        <board id="49">wwwwwwwbwwwbwbbwwbbbbbwwwwwwwwbwwwwbbbwwbwbbb__wbbbb____bw_b____</board>
+        <board id="50">wwwwwwwbwwwbwbbwwbbbbbwwwwwwwwwwwwwbbwwwbwwbw__wbbww____bwwb____</board>
+        <board id="51">wwwwwwwbwwwbwbbwwbbbbbwwwwwwwbwwwwwbbbwwbwwbbb_wbbww____bwwb____</board>
+        <board id="52">wwwwwwwbwwwbwwbwwbbbbwwwwwwwwwwwwwwwbwwwbwwbww_wbbww_w__bwwb____</board>
+        <board id="53">wwwwwwwbwwwbwwbwwbbbbwwwwwwwwwwwwwwwbwwwbwwbwb_wbbww_wb_bwwb____</board>
+        <board id="54">wwwwwwwbwwwbwwbwwbbbbwwwwwwwwwwwwwwwwwwwbwwbww_wbbww_ww_bwwb___w</board>
       </boards>
     </game>
   </games>

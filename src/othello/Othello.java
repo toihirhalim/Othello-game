@@ -6,6 +6,7 @@
 package othello;
 
 import javax.swing.JPanel;
+import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -20,8 +21,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 import javax.swing.Timer;
-import javax.swing.JButton;
 import java.util.Random;
+import java.util.List;
 
 import metier.*;
 
@@ -65,6 +66,8 @@ public class Othello extends javax.swing.JFrame {
         jPanel8 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel7 = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
@@ -90,7 +93,11 @@ public class Othello extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
+        jPanel8.setBackground(new java.awt.Color(139, 137, 135));
+
         jScrollPane1.setBackground(new java.awt.Color(0, 102, 255));
+
+        jPanel7.setBackground(new java.awt.Color(139, 137, 135));
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -105,20 +112,49 @@ public class Othello extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(jPanel7);
 
+        jPanel9.setBackground(new java.awt.Color(51, 51, 51));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Saved Games");
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -133,7 +169,7 @@ public class Othello extends javax.swing.JFrame {
             .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jPanel2.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel2.setBackground(new java.awt.Color(139, 137, 135));
 
         jPanel4.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -307,7 +343,7 @@ public class Othello extends javax.swing.JFrame {
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel3.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel3.setBackground(new java.awt.Color(139, 137, 135));
 
         jButton1.setText("New Game with Computer");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -498,7 +534,7 @@ public class Othello extends javax.swing.JFrame {
                     casePanel.add(circle);
                     if(lastMove != null && lastMove.i == i && lastMove.j == j){
                        circle.setLayout(null);
-                        JPanel redDot = new RoundedPanel(5, Color.red);
+                        JPanel redDot = new RoundedPanel(4, Color.red);
                         redDot.setBackground(null);
                         redDot.setBorder(null);
                         redDot.setBounds(15, 15, 4, 4);
@@ -569,10 +605,59 @@ public class Othello extends javax.swing.JFrame {
     }
     
     private void printOldGames(){
-        jPanel7.setLayout(new GridLayout(20,1));
-        for(int i = 0; i < 20; i++){
-            JButton b1 = new JButton("hi");
-            jPanel7.add(b1);
+        Color itemColor = new Color(105, 103, 101);
+        List<GameItem> gameItems = DataBase.listAllGames();
+        
+        if(gameItems == null) return;
+        
+        jPanel7.setLayout(null);
+        int i = 0;
+        for(GameItem g : gameItems){
+            
+            JPanel oldGame = new JPanel();
+            oldGame.setBounds(0, i*50+i, 233, 50);
+            oldGame.setBackground(itemColor);
+            oldGame.setLayout(null);
+            
+            JPanel whiteCirclePanel = new JPanel();
+            whiteCirclePanel.setBackground(boardColor);
+            whiteCirclePanel.setBounds(183, 5, 30, 30);
+            whiteCirclePanel.setLayout(null);
+            JPanel blackCirclePanel = new JPanel();
+            blackCirclePanel.setBackground(boardColor);
+            blackCirclePanel.setBounds(5, 5, 30, 30);
+            blackCirclePanel.setLayout(null);
+            
+            JPanel whiteCircle = new RoundedPanel(24, whiteColor);
+            whiteCircle.setBackground(null);
+            whiteCircle.setBounds(3, 3, 24, 24);
+            
+            JPanel blackCircle = new RoundedPanel(24, blackColor);
+            blackCircle.setBackground(null);
+            blackCircle.setBounds(3, 3, 24, 24);
+            
+            JLabel blackPlayerName = new JLabel(g.blackPlayerName);
+            JLabel whitePlayerName = new JLabel(g.whitePlayerName);
+            JLabel blackPlayerScore = new JLabel("" + g.blackPlayerScore);
+            JLabel whitePlayerScore = new JLabel("" + g.whitePlayerScore);
+            
+            blackPlayerName.setBounds(40, 0, 50, 25);
+            whitePlayerName.setBounds(120, 0, 60, 25);
+            blackPlayerScore.setBounds(40, 24, 50, 10);
+            whitePlayerScore.setBounds(150, 24, 50, 10);
+            
+            whiteCirclePanel.add(whiteCircle);
+            blackCirclePanel.add(blackCircle);
+            
+            oldGame.add(blackCirclePanel);
+            oldGame.add(whiteCirclePanel);
+            oldGame.add(blackPlayerName);
+            oldGame.add(whitePlayerName);
+            oldGame.add(blackPlayerScore);
+            oldGame.add(whitePlayerScore);
+            
+            jPanel7.add(oldGame);
+            i++;
         }
     }
     
@@ -663,6 +748,7 @@ public class Othello extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
@@ -672,6 +758,7 @@ public class Othello extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel whiteNameLabel;
     private javax.swing.JPanel whitePicturePanel;
