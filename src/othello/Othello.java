@@ -191,7 +191,7 @@ public class Othello extends javax.swing.JFrame {
 
         whiteNameLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         whiteNameLabel.setForeground(new java.awt.Color(255, 255, 255));
-        whiteNameLabel.setText("jLabel1");
+        whiteNameLabel.setText("Player1");
 
         whitePointsLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         whitePointsLabel.setForeground(new java.awt.Color(255, 255, 255));
