@@ -36,6 +36,14 @@ public class Player {
         this.score = 0;
     }
 
+    public Player(String name, String color, int score) {
+        this.name = name;
+        this.color = color;
+        this.score = score;
+    }
+
+    
+    
     public String getColor() {
         return color;
     }

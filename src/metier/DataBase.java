@@ -227,6 +227,81 @@ public class DataBase {
         return null;
     }
     
+    static Game xmlToGame(Element gameElement){
+        Game game = new Game();
+        
+        try{
+            
+            //parameters
+            
+            String id = gameElement.getAttributeValue("id");
+            
+            game.id = Integer.parseInt(id);
+            
+            game.playWithComputer = gameElement.getChild("parameters").getChild("playWithComputer").getText().equals("true");
+            game.blackPlayNow = gameElement.getChild("parameters").getChild("blackPlayNow").getText().equals("true");
+            
+            String name = gameElement.getChild("parameters").getChild("players").getChild("blackPlayer").getChild("blackPlayerName").getText();
+            String scr = gameElement.getChild("parameters").getChild("players").getChild("blackPlayer").getChild("blackPlayerScore").getText();
+            int score = Integer.parseInt(scr);
+            
+            game.blackPlayer = new Player(name, "b", score);
+            
+            
+            name = gameElement.getChild("parameters").getChild("players").getChild("whitePlayer").getChild("whitePlayerName").getText();
+            scr = gameElement.getChild("parameters").getChild("players").getChild("whitePlayer").getChild("whitePlayerScore").getText();
+            score = Integer.parseInt(scr);
+            
+            game.whitePlayer = new Player(name, "w", score);
+            
+            //moves
+            
+            List<Element> movesElement = gameElement.getChild("moves").getChildren("move");
+            Iterator<Element> i = movesElement.iterator();
+            
+            List<Move> moves = new ArrayList();
+            
+            while (i.hasNext()) {
+                Element courant = (Element) i.next();
+                
+                String x = courant.getChild("iIndex").getText();
+                String y = courant.getChild("jIndex").getText();
+                String color = courant.getChild("color").getText();
+                
+                int row = Integer.parseInt(x);
+                int col = Integer.parseInt(y);
+                
+                moves.add(new Move(row, col, color));
+            }
+            
+            game.moves = moves;
+            if(moves.size() < 0) game.lastMove = moves.get(moves.size() -1);
+            
+            //boards
+            List<Element> boardsElement = gameElement.getChild("boards").getChildren("board");
+            i = boardsElement.iterator();
+            
+            List<String> boards = new ArrayList();
+            
+            while (i.hasNext()) {
+                Element courant = (Element) i.next();
+                
+                String board = courant.getText();
+                
+                boards.add(board);
+                
+            }
+            
+            game.boards = boards;
+            game.board = game.stringToBoard(boards.get(boards.size() - 1));
+            
+        }catch(Exception e){
+            return new Game();
+        }
+        
+        return game;
+    }
+    
     public static boolean saveGame(Game game){
         if(racine == null) initialize();
         ajouterGame(game);
@@ -238,4 +313,29 @@ public class DataBase {
         
         return listGames();
     }
+    
+    public static Game getGame(int id){
+        if(racine == null) initialize();
+        
+        Element game = getGame("" + id);
+        
+        if(game != null){
+            return xmlToGame(game);
+        }
+        
+        return null;
+    }
+    
+    public static Game getLastGame(){
+        if(racine == null) initialize();
+        
+        Element game = getGame("0");
+        
+        if(game != null){
+            return xmlToGame(game);
+        }
+        
+        return null;
+    }
+   
 }
