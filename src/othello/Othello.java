@@ -40,7 +40,6 @@ public class Othello extends javax.swing.JFrame {
         initComponents();
         blackColor = new Color(48, 48, 48);
         whiteColor = Color.white;
-        game = new Game();
         gameBoardPanel = new JPanel();
         gameBoardPanel.setBounds(0, 0, 360, 360);
         gameBoardPanel.setBackground(boardColor);
@@ -49,6 +48,8 @@ public class Othello extends javax.swing.JFrame {
         timer1 = new Timer(delay, taskPerformer1);
         timer.start();
         drawProfilesPictures();
+        game = DataBase.getLastGame();
+        if(game == null) game = new Game();
         initGame();
         printOldGames();
     }
@@ -441,12 +442,14 @@ public class Othello extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         game.playWithComputer = true;
+        game.newGame();
         initGame();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         game.playWithComputer = false;
+        game.newGame();
         initGame();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -503,6 +506,7 @@ public class Othello extends javax.swing.JFrame {
     
     private void print(){
         String [][] board= game.getBoard();
+        game.setPossibleMoves();
         Border blackline = BorderFactory.createLineBorder(Color.black);
         Move lastMove = game.getLastMove();
         gameBoardPanel.removeAll();
@@ -576,7 +580,6 @@ public class Othello extends javax.swing.JFrame {
     
     private void initGame(){
         timer.stop();
-        game.newGame();
         whiteCountDown = new CountDown(maxTime,0);
         blackCountDown = new CountDown(maxTime,0);
         whiteNameLabel.setText(game.whitePlayer.getName());
@@ -658,9 +661,36 @@ public class Othello extends javax.swing.JFrame {
             
             jPanel7.add(oldGame);
             i++;
+            
+            final int id = g.gameId;
+            oldGame.addMouseListener(new MouseAdapter() {
+                int gameId = id;
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                    getOldGame(id);
+                }
+            });
         }
     }
     
+    private void getOldGame(int id){
+        Game newGame = DataBase.getGame(id);
+        
+        if(newGame != null){
+            game = newGame;
+            initGame();
+            print();
+            if(game.playWithComputer && !game.blackPlayNow()){
+                timer1.start();
+            }
+        }
+    }
     
     /**
      * @param args the command line arguments

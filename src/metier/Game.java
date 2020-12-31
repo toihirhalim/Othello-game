@@ -250,5 +250,7 @@ public class Game {
         }
         return null;
     }
-    
+    public void setPossibleMoves(){
+        this.playerPossibleMoves = possibleMoves(getPlayerColor());
+    }
 }
