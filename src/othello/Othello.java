@@ -501,7 +501,6 @@ public class Othello extends javax.swing.JFrame {
                 //play randomly
             game.playMove(game.whitePlayer.play(game.getBoard(), game.possibleMoves("w")));
             }
-            
             print();
             
             if(game.gameOver()){
@@ -600,7 +599,14 @@ public class Othello extends javax.swing.JFrame {
         whiteNameLabel.setText(game.whitePlayer.getName());
         blackNameLabel.setText(game.blackPlayer.getName());
         print();
-        timer.start();
+        if(game.gameOver()){
+            gameOver();
+        }else {
+            timer.start();
+            if(game.playWithComputer && !game.blackPlayNow()){
+                timer1.start();
+            }
+        }
     }
     
     public void drawProfilesPictures(){
@@ -711,9 +717,6 @@ public class Othello extends javax.swing.JFrame {
             game = newGame;
             initGame();
             print();
-            if(game.playWithComputer && !game.blackPlayNow()){
-                timer1.start();
-            }
         }
     }
     
@@ -758,10 +761,10 @@ public class Othello extends javax.swing.JFrame {
     ActionListener taskPerformer = new ActionListener() {
         public void actionPerformed(ActionEvent evt) {
             if(game.blackPlayNow()){
-                blackCountDown.removeSec(1);
+                if(blackCountDown.removeSec())
                 blackTimeLabel.setText(blackCountDown.toString());
             }else{
-                whiteCountDown.removeSec(1);
+                if(whiteCountDown.removeSec())
                 whiteTimeLabel.setText(whiteCountDown.toString());
             }
         }
@@ -878,16 +881,19 @@ public class Othello extends javax.swing.JFrame {
             this.min = min;
             this.sec = sec;
         }
-        public void removeSec(int sec){
-            if(this.sec - sec >= 0){
-                this.sec -= sec;
-            }else {
+        public boolean removeSec(){
+            if(this.sec > 0){
+                this.sec -= 1;
+                return true;
+            }else if(min > 0) {
                 min--;
-                this.sec += 60 - sec;
+                this.sec += 60 - 1;
+                return true;
             }
             
-            if(this.min <= 0) this.min = 0;
-            if(this.sec <= 0) this.sec = 0;
+            if(this.min < 0) this.min = 0;
+            if(this.sec < 0) this.sec = 0;
+            return false;
         }
         
         public String toString(){

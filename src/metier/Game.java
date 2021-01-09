@@ -69,6 +69,7 @@ public class Game {
         this.moves = new ArrayList();
         this.boards = new ArrayList();
         boards.add(boardToString(this.board));
+        evaluateScore();
         return newBoard;
     }
     public void evaluateScore(){
@@ -170,7 +171,7 @@ public class Game {
             color = blackPlayNow ? "w" : "b";
             blackPlayNow = !blackPlayNow;
             playerPossibleMoves = possibleMoves(color);
-            if(playerPossibleMoves.length == 0) return false;
+            if(playerPossibleMoves.length == 0) return true;
         }
         
         return false;

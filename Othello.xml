@@ -1,72 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Othello>
-  <serialId>5</serialId>
+  <serialId>10</serialId>
   <games>
-    <game id="1">
-      <parameters>
-        <playWithComputer>true</playWithComputer>
-        <blackPlayNow>true</blackPlayNow>
-        <players>
-          <blackPlayer>
-            <blackPlayerName>Player 1</blackPlayerName>
-            <blackPlayerScore>4</blackPlayerScore>
-          </blackPlayer>
-          <whitePlayer>
-            <whitePlayerName>Computer</whitePlayerName>
-            <whitePlayerScore>4</whitePlayerScore>
-          </whitePlayer>
-        </players>
-      </parameters>
-      <moves>
-        <move id="1">
-          <iIndex>3</iIndex>
-          <jIndex>2</jIndex>
-          <color>b</color>
-        </move>
-        <move id="2">
-          <iIndex>4</iIndex>
-          <jIndex>2</jIndex>
-          <color>w</color>
-        </move>
-        <move id="3">
-          <iIndex>5</iIndex>
-          <jIndex>3</jIndex>
-          <color>b</color>
-        </move>
-        <move id="4">
-          <iIndex>6</iIndex>
-          <jIndex>4</jIndex>
-          <color>w</color>
-        </move>
-      </moves>
-      <boards>
-        <board id="0">___________________________wb______bw___________________________</board>
-        <board id="1">__________________________bbb______bw___________________________</board>
-        <board id="2">__________________________bbb_____www___________________________</board>
-        <board id="3">__________________________bbb_____wbw______b____________________</board>
-        <board id="4">__________________________bbb_____wbw______w________w___________</board>
-      </boards>
-    </game>
-    <game id="2">
-      <parameters>
-        <playWithComputer>true</playWithComputer>
-        <blackPlayNow>true</blackPlayNow>
-        <players>
-          <blackPlayer>
-            <blackPlayerName>Player 1</blackPlayerName>
-            <blackPlayerScore>0</blackPlayerScore>
-          </blackPlayer>
-          <whitePlayer>
-            <whitePlayerName>Computer</whitePlayerName>
-            <whitePlayerScore>0</whitePlayerScore>
-          </whitePlayer>
-        </players>
-      </parameters>
-      <moves />
-      <boards>
-        <board id="0">___________________________wb______bw___________________________</board>
-      </boards>
-    </game>
     <game id="5">
       <parameters>
         <playWithComputer>false</playWithComputer>
@@ -539,6 +474,375 @@
         <board id="16">____________w_b___bbwb_____ww______bw____wwbw____bwb_w__b__b____</board>
         <board id="17">____________w_b___bbwb_____ww___b__bw____bwbw____bbb_w__b__b____</board>
         <board id="18">_________w__w_b___wbwb_____ww___b__bw____bwbw____bbb_w__b__b____</board>
+      </boards>
+    </game>
+    <game id="10">
+      <parameters>
+        <playWithComputer>true</playWithComputer>
+        <blackPlayNow>false</blackPlayNow>
+        <players>
+          <blackPlayer>
+            <blackPlayerName>Player 1</blackPlayerName>
+            <blackPlayerScore>0</blackPlayerScore>
+          </blackPlayer>
+          <whitePlayer>
+            <whitePlayerName>Computer</whitePlayerName>
+            <whitePlayerScore>42</whitePlayerScore>
+          </whitePlayer>
+        </players>
+      </parameters>
+      <moves>
+        <move id="1">
+          <iIndex>5</iIndex>
+          <jIndex>4</jIndex>
+          <color>b</color>
+        </move>
+        <move id="2">
+          <iIndex>3</iIndex>
+          <jIndex>5</jIndex>
+          <color>w</color>
+        </move>
+        <move id="3">
+          <iIndex>2</iIndex>
+          <jIndex>4</jIndex>
+          <color>b</color>
+        </move>
+        <move id="4">
+          <iIndex>5</iIndex>
+          <jIndex>3</jIndex>
+          <color>w</color>
+        </move>
+        <move id="5">
+          <iIndex>4</iIndex>
+          <jIndex>2</jIndex>
+          <color>b</color>
+        </move>
+        <move id="6">
+          <iIndex>1</iIndex>
+          <jIndex>3</jIndex>
+          <color>w</color>
+        </move>
+        <move id="7">
+          <iIndex>4</iIndex>
+          <jIndex>5</jIndex>
+          <color>b</color>
+        </move>
+        <move id="8">
+          <iIndex>3</iIndex>
+          <jIndex>1</jIndex>
+          <color>w</color>
+        </move>
+        <move id="9">
+          <iIndex>4</iIndex>
+          <jIndex>1</jIndex>
+          <color>b</color>
+        </move>
+        <move id="10">
+          <iIndex>2</iIndex>
+          <jIndex>3</jIndex>
+          <color>w</color>
+        </move>
+        <move id="11">
+          <iIndex>1</iIndex>
+          <jIndex>2</jIndex>
+          <color>b</color>
+        </move>
+        <move id="12">
+          <iIndex>4</iIndex>
+          <jIndex>0</jIndex>
+          <color>w</color>
+        </move>
+        <move id="13">
+          <iIndex>5</iIndex>
+          <jIndex>2</jIndex>
+          <color>b</color>
+        </move>
+        <move id="14">
+          <iIndex>5</iIndex>
+          <jIndex>5</jIndex>
+          <color>w</color>
+        </move>
+        <move id="15">
+          <iIndex>3</iIndex>
+          <jIndex>0</jIndex>
+          <color>b</color>
+        </move>
+        <move id="16">
+          <iIndex>2</iIndex>
+          <jIndex>0</jIndex>
+          <color>w</color>
+        </move>
+        <move id="17">
+          <iIndex>2</iIndex>
+          <jIndex>1</jIndex>
+          <color>b</color>
+        </move>
+        <move id="18">
+          <iIndex>0</iIndex>
+          <jIndex>1</jIndex>
+          <color>w</color>
+        </move>
+        <move id="19">
+          <iIndex>0</iIndex>
+          <jIndex>3</jIndex>
+          <color>b</color>
+        </move>
+        <move id="20">
+          <iIndex>2</iIndex>
+          <jIndex>2</jIndex>
+          <color>w</color>
+        </move>
+        <move id="21">
+          <iIndex>1</iIndex>
+          <jIndex>1</jIndex>
+          <color>b</color>
+        </move>
+        <move id="22">
+          <iIndex>5</iIndex>
+          <jIndex>1</jIndex>
+          <color>w</color>
+        </move>
+        <move id="23">
+          <iIndex>1</iIndex>
+          <jIndex>0</jIndex>
+          <color>b</color>
+        </move>
+        <move id="24">
+          <iIndex>0</iIndex>
+          <jIndex>0</jIndex>
+          <color>w</color>
+        </move>
+        <move id="25">
+          <iIndex>3</iIndex>
+          <jIndex>2</jIndex>
+          <color>b</color>
+        </move>
+        <move id="26">
+          <iIndex>0</iIndex>
+          <jIndex>2</jIndex>
+          <color>w</color>
+        </move>
+        <move id="27">
+          <iIndex>2</iIndex>
+          <jIndex>5</jIndex>
+          <color>b</color>
+        </move>
+        <move id="28">
+          <iIndex>0</iIndex>
+          <jIndex>4</jIndex>
+          <color>w</color>
+        </move>
+        <move id="29">
+          <iIndex>1</iIndex>
+          <jIndex>4</jIndex>
+          <color>b</color>
+        </move>
+        <move id="30">
+          <iIndex>1</iIndex>
+          <jIndex>5</jIndex>
+          <color>w</color>
+        </move>
+        <move id="31">
+          <iIndex>3</iIndex>
+          <jIndex>6</jIndex>
+          <color>b</color>
+        </move>
+        <move id="32">
+          <iIndex>3</iIndex>
+          <jIndex>7</jIndex>
+          <color>w</color>
+        </move>
+        <move id="33">
+          <iIndex>6</iIndex>
+          <jIndex>3</jIndex>
+          <color>b</color>
+        </move>
+        <move id="34">
+          <iIndex>7</iIndex>
+          <jIndex>2</jIndex>
+          <color>w</color>
+        </move>
+        <move id="35">
+          <iIndex>6</iIndex>
+          <jIndex>1</jIndex>
+          <color>b</color>
+        </move>
+        <move id="36">
+          <iIndex>7</iIndex>
+          <jIndex>0</jIndex>
+          <color>w</color>
+        </move>
+        <move id="37">
+          <iIndex>5</iIndex>
+          <jIndex>6</jIndex>
+          <color>b</color>
+        </move>
+        <move id="38">
+          <iIndex>5</iIndex>
+          <jIndex>7</jIndex>
+          <color>w</color>
+        </move>
+      </moves>
+      <boards>
+        <board id="0">___________________________wb______bw___________________________</board>
+        <board id="1">___________________________wb______bb_______b___________________</board>
+        <board id="2">___________________________www_____bb_______b___________________</board>
+        <board id="3">____________________b______wbw_____bb_______b___________________</board>
+        <board id="4">____________________b______wbw_____ww______wb___________________</board>
+        <board id="5">____________________b______bbw____bww______wb___________________</board>
+        <board id="6">___________w________w______bbw____bww______wb___________________</board>
+        <board id="7">___________w________w______bbw____bbbb_____wb___________________</board>
+        <board id="8">___________w________w____w_bbw____wbbb_____wb___________________</board>
+        <board id="9">___________w________w____w_bbw___bbbbb_____wb___________________</board>
+        <board id="10">___________w_______ww____w_wbw___bbwbb_____wb___________________</board>
+        <board id="11">__________bw_______bw____w_wbw___bbwbb_____wb___________________</board>
+        <board id="12">__________bw_______bw____w_wbw__wwwwbb_____wb___________________</board>
+        <board id="13">__________bw_______bw____w_wbw__wwwbbb____bbb___________________</board>
+        <board id="14">__________bw_______bw____w_wbw__wwwbww____bbbw__________________</board>
+        <board id="15">__________bw_______bw___bw_wbw__wbwbww____bbbw__________________</board>
+        <board id="16">__________bw____w__bw___ww_wbw__wbwbww____bbbw__________________</board>
+        <board id="17">__________bw____wb_bw___wb_wbw__wbwbww____bbbw__________________</board>
+        <board id="18">_w________ww____wb_ww___wb_www__wbwbww____bbbw__________________</board>
+        <board id="19">_w_b______bb____wb_bw___wb_bww__wbwbww____bbbw__________________</board>
+        <board id="20">_w_b______bb____wwwww___ww_www__wbwbww____bbbw__________________</board>
+        <board id="21">_w_b_____bbb____wbwww___wb_www__wbwbww____bbbw__________________</board>
+        <board id="22">_w_b_____wbb____wwwww___ww_www__wwwbww___wwwww__________________</board>
+        <board id="23">_w_b____bbbb____wwwww___ww_www__wwwbww___wwwww__________________</board>
+        <board id="24">ww_b____wwbb____wwwww___ww_www__wwwbww___wwwww__________________</board>
+        <board id="25">ww_b____wwbb____wwbww___wwbwww__wwwbww___wwwww__________________</board>
+        <board id="26">wwwb____wwww____wwwww___wwwwww__wwwbww___wwwww__________________</board>
+        <board id="27">wwwb____wwww____wwwwwb__wwwwbw__wwwbww___wwwww__________________</board>
+        <board id="28">wwwww___wwww____wwwwwb__wwwwbw__wwwbww___wwwww__________________</board>
+        <board id="29">wwwww___wwwwb___wwwwbb__wwwwbw__wwwbww___wwwww__________________</board>
+        <board id="30">wwwww___wwwwww__wwwwww__wwwwbw__wwwbww___wwwww__________________</board>
+        <board id="31">wwwww___wwwwww__wwwwww__wwwwbbb_wwwbww___wwwww__________________</board>
+        <board id="32">wwwww___wwwwww__wwwwww__wwwwwwwwwwwbww___wwwww__________________</board>
+        <board id="33">wwwww___wwwwww__wwwwww__wwwwwwwwwwwbww___wwbww_____b____________</board>
+        <board id="34">wwwww___wwwwww__wwwwww__wwwwwwwwwwwbww___wwbww_____w______w_____</board>
+        <board id="35">wwwww___wwwwww__wwwwww__wwwwwwwwwwwbww___wbbww___b_w______w_____</board>
+        <board id="36">wwwww___wwwwww__wwwwww__wwwwwwwwwwwwww___wwbww___w_w____w_w_____</board>
+        <board id="37">wwwww___wwwwww__wwwwww__wwwwwwwwwwwwww___wwbbbb__w_w____w_w_____</board>
+        <board id="38">wwwww___wwwwww__wwwwww__wwwwwwwwwwwwww___wwwwwww_w_w____w_w_____</board>
+      </boards>
+    </game>
+    <game id="1">
+      <parameters>
+        <playWithComputer>true</playWithComputer>
+        <blackPlayNow>false</blackPlayNow>
+        <players>
+          <blackPlayer>
+            <blackPlayerName>Player 1</blackPlayerName>
+            <blackPlayerScore>6</blackPlayerScore>
+          </blackPlayer>
+          <whitePlayer>
+            <whitePlayerName>Computer</whitePlayerName>
+            <whitePlayerScore>9</whitePlayerScore>
+          </whitePlayer>
+        </players>
+      </parameters>
+      <moves>
+        <move id="1">
+          <iIndex>3</iIndex>
+          <jIndex>2</jIndex>
+          <color>b</color>
+        </move>
+        <move id="2">
+          <iIndex>4</iIndex>
+          <jIndex>2</jIndex>
+          <color>w</color>
+        </move>
+        <move id="3">
+          <iIndex>5</iIndex>
+          <jIndex>3</jIndex>
+          <color>b</color>
+        </move>
+        <move id="4">
+          <iIndex>6</iIndex>
+          <jIndex>4</jIndex>
+          <color>w</color>
+        </move>
+        <move id="5">
+          <iIndex>4</iIndex>
+          <jIndex>1</jIndex>
+          <color>b</color>
+        </move>
+        <move id="6">
+          <iIndex>4</iIndex>
+          <jIndex>0</jIndex>
+          <color>w</color>
+        </move>
+        <move id="7">
+          <iIndex>5</iIndex>
+          <jIndex>0</jIndex>
+          <color>b</color>
+        </move>
+        <move id="8">
+          <iIndex>6</iIndex>
+          <jIndex>0</jIndex>
+          <color>w</color>
+        </move>
+        <move id="9">
+          <iIndex>5</iIndex>
+          <jIndex>1</jIndex>
+          <color>b</color>
+        </move>
+        <move id="10">
+          <iIndex>2</iIndex>
+          <jIndex>4</jIndex>
+          <color>w</color>
+        </move>
+        <move id="11">
+          <iIndex>4</iIndex>
+          <jIndex>5</jIndex>
+          <color>b</color>
+        </move>
+      </moves>
+      <boards>
+        <board id="0">___________________________wb______bw___________________________</board>
+        <board id="1">__________________________bbb______bw___________________________</board>
+        <board id="2">__________________________bbb_____www___________________________</board>
+        <board id="3">__________________________bbb_____wbw______b____________________</board>
+        <board id="4">__________________________bbb_____wbw______w________w___________</board>
+        <board id="5">__________________________bbb____bbbw______w________w___________</board>
+        <board id="6">__________________________bbb___wwwww______w________w___________</board>
+        <board id="7">__________________________bbb___wbwww___b__w________w___________</board>
+        <board id="8">__________________________bbb___wbwww___w__w____w___w___________</board>
+        <board id="9">__________________________bbb___wbbww___wb_w____w___w___________</board>
+        <board id="10">____________________w_____bww___wbwww___ww_w____w___w___________</board>
+        <board id="11">____________________w_____bww___wbbbbb__ww_w____w___w___________</board>
+      </boards>
+    </game>
+    <game id="2">
+      <parameters>
+        <playWithComputer>true</playWithComputer>
+        <blackPlayNow>true</blackPlayNow>
+        <players>
+          <blackPlayer>
+            <blackPlayerName>Player 1</blackPlayerName>
+            <blackPlayerScore>3</blackPlayerScore>
+          </blackPlayer>
+          <whitePlayer>
+            <whitePlayerName>Computer</whitePlayerName>
+            <whitePlayerScore>3</whitePlayerScore>
+          </whitePlayer>
+        </players>
+      </parameters>
+      <moves>
+        <move id="1">
+          <iIndex>3</iIndex>
+          <jIndex>2</jIndex>
+          <color>b</color>
+        </move>
+        <move id="2">
+          <iIndex>2</iIndex>
+          <jIndex>2</jIndex>
+          <color>w</color>
+        </move>
+      </moves>
+      <boards>
+        <board id="0">___________________________wb______bw___________________________</board>
+        <board id="1">__________________________bbb______bw___________________________</board>
+        <board id="2">__________________w_______bwb______bw___________________________</board>
       </boards>
     </game>
   </games>
