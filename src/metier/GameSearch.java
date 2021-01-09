@@ -96,9 +96,7 @@ public class GameSearch{
             bestVal = moveVal; 
         } 
     } 
-  
-    System.out.println("The best move for " + bestMove.color + " is " + bestMove + "with the value " + bestVal); 
-  
+    
     return bestMove; 
 } 
     static int minimax(String [][] board, int depth, Boolean isMax, int alpha, int beta) 

@@ -23,6 +23,7 @@ import javax.swing.border.Border;
 import javax.swing.Timer;
 import java.util.Random;
 import java.util.List;
+import javax.swing.JDialog;
 
 import metier.*;
 
@@ -455,10 +456,9 @@ public class Othello extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        String b = game.boardToString(game.getBoard());
-        String [][] newBoard = game.stringToBoard(b);
-        Move bestMove = GameSearch.findBestMove(newBoard, game.getPlayerColor());
-        //System.out.println("the best move is : " + bestMove);
+        Move bestMove = game.findBestMove();
+        print();
+        System.out.println("the best move is : " + bestMove);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -486,7 +486,7 @@ public class Othello extends javax.swing.JFrame {
             gameOver();
             return;
         }
-        if(game.playWithComputer){
+        if(game.playWithComputer && !game.blackPlayNow()){
             timer1.start();
         }
         
@@ -494,11 +494,20 @@ public class Othello extends javax.swing.JFrame {
     
     private void playComputer(){
         if(game.playWithComputer){
+            try {
+                //play using AI
+                game.playMove(game.findBestMove());
+            }catch(Exception e){
+                //play randomly
             game.playMove(game.whitePlayer.play(game.getBoard(), game.possibleMoves("w")));
+            }
+            
             print();
             
             if(game.gameOver()){
                 gameOver();
+            }else if(!game.blackPlayNow()){
+                timer1.restart();
             }
         }
         timer1.stop();
@@ -507,6 +516,7 @@ public class Othello extends javax.swing.JFrame {
     private void print(){
         String [][] board= game.getBoard();
         game.setPossibleMoves();
+        Move bestMove = game.getBestMove();
         Border blackline = BorderFactory.createLineBorder(Color.black);
         Move lastMove = game.getLastMove();
         gameBoardPanel.removeAll();
@@ -546,6 +556,11 @@ public class Othello extends javax.swing.JFrame {
                     }
                 }else if(game.isPossibleMove(i, j)){
                     JPanel circle = new RoundedPanel(35, null);
+                            
+                    if(bestMove != null && bestMove.i == i && bestMove.j == j){
+                        circle = new RoundedPanel(35, new Color(0, 255, 0));
+                    }    
+                     
                     circle.setBackground(null);
                     circle.setBounds(5, 5, 35, 35);
                     casePanel.add(circle);
@@ -605,6 +620,16 @@ public class Othello extends javax.swing.JFrame {
         timer.stop();
         System.out.println(game.winner());
         //new dialog
+        
+        JDialog d = new JDialog(this, "game status");
+        JPanel p = new JPanel();
+        
+        JLabel l = new JLabel(game.winner());
+        p.add(l);
+        d.add(p);
+        
+        d.setSize(200, 200);
+        d.setVisible(true);
     }
     
     private void printOldGames(){

@@ -22,6 +22,7 @@ public class Game {
     boolean blackPlayNow = true;
     Move [] playerPossibleMoves;
     Move lastMove;
+    Move bestMove = null;
     List<Move> moves;
     List<String> boards;
     
@@ -153,6 +154,7 @@ public class Game {
         moves.add(move);
         boards.add(boardToString(board));
         lastMove = move;
+        bestMove = null;
         blackPlayNow = !blackPlayNow;
             
         return previous;
@@ -227,6 +229,20 @@ public class Game {
     }
     public Move getLastMove(){
         return this.lastMove;
+    }
+    public Move findBestMove(){
+        Move move = null;
+        String b = boardToString(board);
+        String [][] newBoard = stringToBoard(b);
+        move = GameSearch.findBestMove(newBoard, getPlayerColor());
+        
+        move.color = getPlayerColor();
+        
+        this.bestMove = move;
+        return move;
+    }
+    public Move getBestMove(){
+        return this.bestMove;
     }
     public String boardToString(String [][] board){
         String str = "";
