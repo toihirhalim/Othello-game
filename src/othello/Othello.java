@@ -50,7 +50,10 @@ public class Othello extends javax.swing.JFrame {
         timer.start();
         drawProfilesPictures();
         game = DataBase.getLastGame();
-        if(game == null) game = new Game();
+        if(game == null) {
+            game = new Game();
+            game.newGame();
+        }
         initGame();
         printOldGames();
     }
@@ -472,6 +475,7 @@ public class Othello extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         DataBase.saveGame(game);
+        printOldGames();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void play(int i, int j){
@@ -496,10 +500,15 @@ public class Othello extends javax.swing.JFrame {
         if(game.playWithComputer){
             try {
                 //play using AI
-                game.playMove(game.findBestMove());
+                Move bestMove = game.findBestMove();
+                if(bestMove != null){
+                    game.playMove(bestMove);
+                }else{
+                    game.playMove(game.whitePlayer.play(game.getBoard(), game.possibleMoves("w")));
+                }
             }catch(Exception e){
                 //play randomly
-            game.playMove(game.whitePlayer.play(game.getBoard(), game.possibleMoves("w")));
+                game.playMove(game.whitePlayer.play(game.getBoard(), game.possibleMoves("w")));
             }
             print();
             
@@ -643,11 +652,14 @@ public class Othello extends javax.swing.JFrame {
         List<GameItem> gameItems = DataBase.listAllGames();
         
         if(gameItems == null) return;
-        
+        jPanel7.removeAll();
+        jPanel7.revalidate();
+        jPanel7.repaint();
         jPanel7.setLayout(null);
         int i = 0;
-        for(GameItem g : gameItems){
-            
+        
+        for(int j = gameItems.size()-1; j >= 0; j-- ){
+            GameItem g = gameItems.get(j);
             JPanel oldGame = new JPanel();
             oldGame.setBounds(0, i*50+i, 233, 50);
             oldGame.setBackground(itemColor);

@@ -237,9 +237,12 @@ public class Game {
         String [][] newBoard = stringToBoard(b);
         move = GameSearch.findBestMove(newBoard, getPlayerColor());
         
-        move.color = getPlayerColor();
+        if(move != null){
+            move.color = getPlayerColor();
         
-        this.bestMove = move;
+            this.bestMove = move;
+        }
+        
         return move;
     }
     public Move getBestMove(){

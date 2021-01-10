@@ -73,6 +73,8 @@ public class GameSearch{
     // for all empty cells. And return the cell  
     // with optimal value. 
     Move [] possibleMoves = possibleMoves(board, player);
+    if(possibleMoves.length > 0)
+        bestMove = possibleMoves[0];
     for (int i = 0; i < possibleMoves.length; i++) 
     { 
         // Make the move 
