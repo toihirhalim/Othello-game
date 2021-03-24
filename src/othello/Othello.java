@@ -603,8 +603,9 @@ public class Othello extends javax.swing.JFrame {
     
     private void initGame(){
         timer.stop();
-        whiteCountDown = new CountDown(maxTime,0);
-        blackCountDown = new CountDown(maxTime,0);
+        game.newTimer();
+        blackTimeLabel.setText(game.getBlackPlayerTimer().toString());
+        whiteTimeLabel.setText(game.getWhitePlayerTimer().toString());
         whiteNameLabel.setText(game.whitePlayer.getName());
         blackNameLabel.setText(game.blackPlayer.getName());
         print();
@@ -773,11 +774,11 @@ public class Othello extends javax.swing.JFrame {
     ActionListener taskPerformer = new ActionListener() {
         public void actionPerformed(ActionEvent evt) {
             if(game.blackPlayNow()){
-                if(blackCountDown.removeSec())
-                blackTimeLabel.setText(blackCountDown.toString());
+                if(game.getBlackPlayerTimer().removeSec())
+                blackTimeLabel.setText(game.getBlackPlayerTimer().toString());
             }else{
-                if(whiteCountDown.removeSec())
-                whiteTimeLabel.setText(whiteCountDown.toString());
+                if(game.getWhitePlayerTimer().removeSec())
+                whiteTimeLabel.setText(game.getWhitePlayerTimer().toString());
             }
         }
     };
@@ -798,12 +799,9 @@ public class Othello extends javax.swing.JFrame {
         }
     };
     
-    private int maxTime = 5;
     private Color boardColor = new Color(0, 188, 140);
     private Color blackColor = new Color(48, 48, 48);
     private Color whiteColor = Color.white;
-    private CountDown whiteCountDown;
-    private CountDown blackCountDown;
     private Timer timer;
     private Timer timer1;
     private JPanel gameBoardPanel;
@@ -881,37 +879,4 @@ public class Othello extends javax.swing.JFrame {
         }
     }
     
-    class CountDown {
-        public int min;
-        public int sec;
-        
-        public CountDown(){
-            
-        }
-        
-        public CountDown(int min, int sec){
-            this.min = min;
-            this.sec = sec;
-        }
-        public boolean removeSec(){
-            if(this.sec > 0){
-                this.sec -= 1;
-                return true;
-            }else if(min > 0) {
-                min--;
-                this.sec += 60 - 1;
-                return true;
-            }
-            
-            if(this.min < 0) this.min = 0;
-            if(this.sec < 0) this.sec = 0;
-            return false;
-        }
-        
-        public String toString(){
-            String min = this.min >= 10 ? "" + this.min : "0" + this.min;
-            String sec = this.sec >= 10 ? "" + this.sec : "0" + this.sec;
-            return min + " : " + sec;
-        }
-    }
 }

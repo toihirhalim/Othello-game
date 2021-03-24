@@ -20,6 +20,8 @@ public class Game {
     public Player blackPlayer;
     public boolean playWithComputer = true;
     boolean blackPlayNow = true;
+    GameTimer blackPlayerTimer;
+    GameTimer whitePlayerTimer;
     Move [] playerPossibleMoves;
     Move lastMove;
     Move bestMove = null;
@@ -48,6 +50,7 @@ public class Game {
         return false;
     }
     public String [][] newGame(){
+        newTimer();
         String [][] newBoard = {
             {"_", "_", "_", "_", "_", "_", "_", "_"},
             {"_", "_", "_", "_", "_", "_", "_", "_"},
@@ -273,4 +276,23 @@ public class Game {
     public void setPossibleMoves(){
         this.playerPossibleMoves = possibleMoves(getPlayerColor());
     }
+
+    public GameTimer getBlackPlayerTimer() {
+        return blackPlayerTimer;
+    }
+    public void setBlackPlayerTimer(GameTimer blackPlayerTimer) {
+        this.blackPlayerTimer = blackPlayerTimer;
+    }
+    public GameTimer getWhitePlayerTimer() {
+        return whitePlayerTimer;
+    }
+    public void setWhitePlayerTimer(GameTimer whitePlayerTimer) {
+        this.whitePlayerTimer = whitePlayerTimer;
+    }
+    
+    public void newTimer(){
+        this.whitePlayerTimer = new GameTimer(5,0);
+        this.blackPlayerTimer = new GameTimer(5,0);
+    }
+    
 }
