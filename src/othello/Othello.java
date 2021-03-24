@@ -497,7 +497,7 @@ public class Othello extends javax.swing.JFrame {
     }
     
     private void playComputer(){
-        if(game.playWithComputer){
+        if(game.playWithComputer && !game.getWhitePlayerTimer().noTimeLeft()){
             try {
                 //play using AI
                 Move bestMove = game.findBestMove();
@@ -774,11 +774,19 @@ public class Othello extends javax.swing.JFrame {
     ActionListener taskPerformer = new ActionListener() {
         public void actionPerformed(ActionEvent evt) {
             if(game.blackPlayNow()){
-                if(game.getBlackPlayerTimer().removeSec())
-                blackTimeLabel.setText(game.getBlackPlayerTimer().toString());
+                if(game.getBlackPlayerTimer().removeSec()){
+                    blackTimeLabel.setText(game.getBlackPlayerTimer().toString());
+                    if(game.getBlackPlayerTimer().noTimeLeft())gameOver();
+                }else {
+                    gameOver();
+                }
             }else{
-                if(game.getWhitePlayerTimer().removeSec())
-                whiteTimeLabel.setText(game.getWhitePlayerTimer().toString());
+                if(game.getWhitePlayerTimer().removeSec()){
+                    whiteTimeLabel.setText(game.getWhitePlayerTimer().toString());
+                    if(game.getWhitePlayerTimer().noTimeLeft())gameOver();
+                }else {
+                    gameOver();
+                }
             }
         }
     };

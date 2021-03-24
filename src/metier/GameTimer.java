@@ -18,6 +18,10 @@ public class GameTimer {
         this.sec = sec;
     }
     
+    public boolean noTimeLeft(){
+        return min <= 0 && sec <= 0;
+    }
+    
     public boolean removeSec(){
         if(this.sec > 0){
             this.sec--;
