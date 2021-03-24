@@ -20,6 +20,8 @@ public class Game {
     public Player blackPlayer;
     public boolean playWithComputer = true;
     boolean blackPlayNow = true;
+    GameTimer blackPlayerTimer;
+    GameTimer whitePlayerTimer;
     Move [] playerPossibleMoves;
     Move lastMove;
     Move bestMove = null;
@@ -48,6 +50,7 @@ public class Game {
         return false;
     }
     public String [][] newGame(){
+        newTimer();
         String [][] newBoard = {
             {"_", "_", "_", "_", "_", "_", "_", "_"},
             {"_", "_", "_", "_", "_", "_", "_", "_"},
@@ -174,7 +177,7 @@ public class Game {
             if(playerPossibleMoves.length == 0) return true;
         }
         
-        return false;
+        return blackPlayerTimer.noTimeLeft() || whitePlayerTimer.noTimeLeft();
     }
     public void print(){
         for(int i = 0 ; i < board.length; i++){
@@ -185,8 +188,12 @@ public class Game {
         }
     }
     public String winner(){
+        if(blackPlayerTimer.noTimeLeft()) return blackPlayer.getName() + " lost with no time left.";
+        if(whitePlayerTimer.noTimeLeft()) return whitePlayer.getName() + " lost with no time left.";
+
+            
         String winner = whitePlayer.getScore() > blackPlayer.getScore() ? whitePlayer.getName() : whitePlayer.getScore() < blackPlayer.getScore() ? blackPlayer.getName() : "Draw !!!";
-        return winner.equals("draw !!!")? winner : winner + " won !!!";
+        return winner.equals("Draw !!!")? winner : winner + " won !!!";
     }
     public String getColor(int i, int j){
         return board[i][j];
@@ -273,4 +280,23 @@ public class Game {
     public void setPossibleMoves(){
         this.playerPossibleMoves = possibleMoves(getPlayerColor());
     }
+
+    public GameTimer getBlackPlayerTimer() {
+        return blackPlayerTimer;
+    }
+    public void setBlackPlayerTimer(GameTimer blackPlayerTimer) {
+        this.blackPlayerTimer = blackPlayerTimer;
+    }
+    public GameTimer getWhitePlayerTimer() {
+        return whitePlayerTimer;
+    }
+    public void setWhitePlayerTimer(GameTimer whitePlayerTimer) {
+        this.whitePlayerTimer = whitePlayerTimer;
+    }
+    
+    public void newTimer(){
+        this.whitePlayerTimer = new GameTimer(5,0);
+        this.blackPlayerTimer = new GameTimer(5,0);
+    }
+    
 }

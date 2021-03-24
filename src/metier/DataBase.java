@@ -123,6 +123,30 @@ public class DataBase {
             Element blackPlayNow = new Element("blackPlayNow");
             blackPlayNow.setText("" + g.blackPlayNow);
             
+            Element countDowns = new Element("countDowns");
+            
+            Element blackCountDown = new Element("blackCountDown");
+            Element whiteCountDown = new Element("whiteCountDown");
+            
+            Element blackMin = new Element("blackMin");
+            Element blackSec = new Element("blackSec");
+            Element whiteMin = new Element("whiteMin");
+            Element whiteSec = new Element("whiteSec");
+            
+            blackMin.setText("" + g.getBlackPlayerTimer().getMin());
+            blackSec.setText("" + g.getBlackPlayerTimer().getSec());
+            whiteMin.setText("" + g.getWhitePlayerTimer().getMin());
+            whiteSec.setText("" + g.getWhitePlayerTimer().getSec());
+
+            blackCountDown.addContent(blackMin);
+            blackCountDown.addContent(blackSec);
+            whiteCountDown.addContent(whiteMin);
+            whiteCountDown.addContent(whiteSec);
+
+            countDowns.addContent(blackCountDown);
+            countDowns.addContent(whiteCountDown);
+
+            
             Element players = new Element("players");
             
             
@@ -149,6 +173,7 @@ public class DataBase {
             parameters.addContent(playWithComputer);
             parameters.addContent(blackPlayNow);
             parameters.addContent(players);
+            parameters.addContent(countDowns);
             
             int id = 1;
             for(Move m : g.moves){
@@ -240,6 +265,15 @@ public class DataBase {
             
             game.playWithComputer = gameElement.getChild("parameters").getChild("playWithComputer").getText().equals("true");
             game.blackPlayNow = gameElement.getChild("parameters").getChild("blackPlayNow").getText().equals("true");
+            
+            game.blackPlayerTimer = new GameTimer(
+                    Integer.parseInt(gameElement.getChild("parameters").getChild("countDowns").getChild("blackCountDown").getChild("blackMin").getText()),
+                    Integer.parseInt(gameElement.getChild("parameters").getChild("countDowns").getChild("blackCountDown").getChild("blackSec").getText())
+            );
+            game.whitePlayerTimer = new GameTimer(
+                    Integer.parseInt(gameElement.getChild("parameters").getChild("countDowns").getChild("whiteCountDown").getChild("whiteMin").getText()),
+                    Integer.parseInt(gameElement.getChild("parameters").getChild("countDowns").getChild("whiteCountDown").getChild("whiteSec").getText())
+            );
             
             String name = gameElement.getChild("parameters").getChild("players").getChild("blackPlayer").getChild("blackPlayerName").getText();
             String scr = gameElement.getChild("parameters").getChild("players").getChild("blackPlayer").getChild("blackPlayerScore").getText();
