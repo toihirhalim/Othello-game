@@ -603,7 +603,6 @@ public class Othello extends javax.swing.JFrame {
     
     private void initGame(){
         timer.stop();
-        game.newTimer();
         blackTimeLabel.setText(game.getBlackPlayerTimer().toString());
         whiteTimeLabel.setText(game.getWhitePlayerTimer().toString());
         whiteNameLabel.setText(game.whitePlayer.getName());

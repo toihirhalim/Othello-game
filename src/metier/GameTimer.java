@@ -41,4 +41,12 @@ public class GameTimer {
         String secString = this.sec >= 10 ? "" + this.sec : "0" + this.sec;
         return minString + " : " + secString;
     }
+
+    public int getMin() {
+        return min;
+    }
+
+    public int getSec() {
+        return sec;
+    }
 }
